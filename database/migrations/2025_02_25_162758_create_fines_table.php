@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('fine_date');
             $table->string('payment_status')->default(FinePaymentStatus::PENDING->value);
             $table->foreignId('return_book_id')->constrained('return_books')->cascadeOnDelete();
-            $table->foreignId('users_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
