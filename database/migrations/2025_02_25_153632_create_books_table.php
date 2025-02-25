@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->nullable();
             $table->string('author');
-            $table->unsignedBigInteger('publication_year');
+            $table->unsignedInteger('publication_year');
             $table->string('isbn');
             $table->string('language')->default(BookLanguage::INDONESIA->value);
             $table->text('synopsis')->nullable();
-            $table->unsignedBigInteger('number_og_pages')->default(0);
+            $table->unsignedInteger('number_og_pages')->default(0);
             $table->string('status')->default(BookStatus::AVAILABLE->value);
-            $table->unsignedBigInteger('price')->default(0);
+            $table->unsignedInteger('price')->default(0);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('publisher_id')->constrained('publishers')->cascadeOnDelete();
             $table->timestamps();

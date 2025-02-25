@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('total')->default(0);
-            $table->unsignedBigInteger('available')->default(0);
-            $table->unsignedBigInteger('loadn')->default(0);
-            $table->unsignedBigInteger('lost')->default(0);
-            $table->unsignedBigInteger('damage')->default(0);
+            $table->unsignedInteger('total')->default(0);
+            $table->unsignedInteger('available')->default(0);
+            $table->unsignedInteger('loadn')->default(0);
+            $table->unsignedInteger('lost')->default(0);
+            $table->unsignedInteger('damage')->default(0);
             $table->foreignId('book_id')->constrained('books')->cascadeOnDelete();
             $table->timestamps();
         });
