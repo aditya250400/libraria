@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('isbn');
             $table->string('language')->default(BookLanguage::INDONESIA->value);
             $table->text('synopsis')->nullable();
-            $table->unsignedInteger('number_og_pages')->default(0);
+            $table->unsignedInteger('number_of_pages')->default(0);
             $table->string('status')->default(BookStatus::AVAILABLE->value);
             $table->unsignedInteger('price')->default(0);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
