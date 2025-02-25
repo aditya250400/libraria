@@ -13,4 +13,9 @@ class ReturnBookCheck extends Model
     protected $casts = [
         'condition' => ReturnBookCondition::class,
     ];
+
+    public function returnBook()
+    {
+        return $this->belongsTo(ReturnBook::class);
+    }
 }
