@@ -10,3 +10,7 @@ export const FINEPAYMENTSTATUS = {
     SUCCESS: "Sukses",
     FAILED: "Gagal",
 };
+
+export default function flashMessage(params) {
+    return params.props.flash_message;
+}
