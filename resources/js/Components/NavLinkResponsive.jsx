@@ -6,8 +6,8 @@ export default function NavLinkResponsive({ active = false, url = '#', title, ic
         <Link
             className={cn(
                 active
-                    ? 'from--400 bg-gradient-to-r via-orange-600 to-orange-500 font-semibold text-white hover:text-white'
-                    : 'text-muted-foreground hover:text-orange-500',
+                    ? 'from--400 bg-gradient-to-r via-blue-600 to-blue-500 font-semibold text-white hover:text-white'
+                    : 'text-muted-foreground hover:text-blue-500',
                 'flex items-center gap-3 rounded-lg p-2 font-medium transition-all',
             )}
             {...props}
