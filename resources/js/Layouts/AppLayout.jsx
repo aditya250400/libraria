@@ -1,41 +1,8 @@
 import ApplicationLogo from '@/components/ApplicationLogo';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/Components/ui/sheet';
 import { Toaster } from '@/components/ui/sonner';
-import { Head, Link } from '@inertiajs/react';
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import {
-    IconAlertCircle,
-    IconBook,
-    IconBuildingCommunity,
-    IconCategory,
-    IconChartDots2,
-    IconCircleKey,
-    IconCreditCardPay,
-    IconCreditCardRefund,
-    IconDashboard,
-    IconKeyframe,
-    IconLayoutKanban,
-    IconLayoutSidebar,
-    IconLogout,
-    IconMoneybag,
-    IconRoute,
-    IconSettingsExclamation,
-    IconStack,
-    IconUser,
-    IconUsersGroup,
-    IconVersions,
-} from '@tabler/icons-react';
-import NavLink from '../Components/NavLink';
+import { Head } from '@inertiajs/react';
+import Sidebar from './Partials/Sidebar';
+import SidebarResponsive from './Partials/SidebarResponsive';
 
 export default function AppLayout({ title, children }) {
     return (
@@ -51,91 +18,15 @@ export default function AppLayout({ title, children }) {
                         </div>
                         {/* sidebar */}
                         <div className="flex-1">
-                            <nav className="grid items-start px-2 text-sm font-semibold lg:px-4">
-                                {/* dashboard */}
-                                <div className="px-3 py-2 text-sm font-semibold text-foreground">Dashboard</div>
-                                <NavLink url="#" title="Dashboard" icon={IconDashboard} />
-
-                                {/* statistik */}
-                                <div className="px-3 py-2 text-sm font-semibold text-foreground">Statistik</div>
-                                <NavLink url="#" title="Statistik Peminjaman" icon={IconChartDots2} />
-                                <NavLink url="#" title="Laporan Denda" icon={IconMoneybag} />
-                                <NavLink url="#" title="Laporan Stok Buku" icon={IconStack} />
-
-                                {/* Master */}
-                                <div className="px-3 py-2 text-sm font-semibold text-foreground">Master</div>
-                                <NavLink url="#" title="Kategori" icon={IconCategory} />
-                                <NavLink url="#" title="Penerbit" icon={IconBuildingCommunity} />
-                                <NavLink url="#" title="Buku" icon={IconBook} />
-                                <NavLink url="#" title="Pengguna" icon={IconUsersGroup} />
-                                <NavLink url="#" title="Pengaturan Denda" icon={IconSettingsExclamation} />
-
-                                {/* Peran dan Izin */}
-                                <div className="px-3 py-2 text-sm font-semibold text-foreground">Peran dan Izin</div>
-                                <NavLink url="#" title="Izin" icon={IconCircleKey} />
-                                <NavLink url="#" title="Peran" icon={IconVersions} />
-                                <NavLink url="#" title="Tetapkan Izin" icon={IconKeyframe} />
-                                <NavLink url="#" title="Tetapkan Peran" icon={IconLayoutKanban} />
-                                <NavLink url="#" title="Akses Rute" icon={IconRoute} />
-
-                                {/* Transaksi */}
-                                <div className="px-3 py-2 text-sm font-semibold text-foreground">Transaksi</div>
-                                <NavLink url="#" title="Peminjaman" icon={IconCreditCardPay} />
-                                <NavLink url="#" title="Pengembalian" icon={IconCreditCardRefund} />
-
-                                {/* Lainnya */}
-                                <div className="px-3 py-2 text-sm font-semibold text-foreground">Lainnya</div>
-                                <NavLink url="#" title="Pengumuman" icon={IconAlertCircle} />
-                                <NavLink url={route('profile.edit')} title="Profile" icon={IconUser} />
-                                <NavLink url="#" title="Logout" icon={IconLogout} />
-                            </nav>
+                            <Sidebar />
                         </div>
                         {/* sidebar end */}
                     </div>
                 </div>
 
                 <div className="flex w-full flex-col lg:w-4/5">
-                    <header className="flex h-12 items-center justify-between gap-4 border-b px-4 lg:h-[60px] lg:justify-end lg:px-6">
-                        {/* sidebar responseive */}
-                        <Sheet>
-                            <SheetTrigger asChild>
-                                <Button variant="outline" size="icon" className="shrink-0 lg:hidden">
-                                    <IconLayoutSidebar className="size-5" />
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent side="left" className="flex max-h-screen flex-col overflow-y-auto">
-                                <SheetHeader>
-                                    <SheetTitle>
-                                        <VisuallyHidden.Root>Sidebar Responsive</VisuallyHidden.Root>
-                                    </SheetTitle>
-                                    <SheetDescription>
-                                        <VisuallyHidden.Root>Sidebar Responsive</VisuallyHidden.Root>
-                                    </SheetDescription>
-                                </SheetHeader>
-                                {/* sidebar */}
-                            </SheetContent>
-                        </Sheet>
-                        {/* dropdown */}
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" className="flex gap-x-2">
-                                    <span>Hi, Luffy</span>
-                                    <Avatar>
-                                        <AvatarFallback>L</AvatarFallback>
-                                    </Avatar>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                                <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem>Profile</DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <Link href="#">Logout</Link>
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                        {/* dropdown end */}
-                    </header>
+                    {/* sidebar responseive  */}
+                    <SidebarResponsive />
                     {/* sidebar responseive end */}
 
                     <main className="w-full">
