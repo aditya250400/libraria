@@ -7,7 +7,7 @@ export default function NavLinkResponsive({ active = false, url = '#', title, ic
             href={url}
             className={cn(
                 active
-                    ? 'from-400 bg-gradient-to-r via-blue-600 to-blue-500 font-semibold text-white hover:text-white'
+                    ? 'bg-gradient-to-r from-blue-400 via-blue-600 to-blue-500 font-semibold text-white hover:text-white'
                     : 'text-muted-foreground hover:text-blue-500',
                 'flex items-center gap-3 rounded-lg p-2 font-medium transition-all',
             )}

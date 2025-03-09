@@ -21,13 +21,18 @@ import {
 } from '@tabler/icons-react';
 import NavLink from '../../Components/NavLink';
 
-export default function Sidebar() {
+export default function Sidebar({ url }) {
     return (
         <>
             <nav className="grid items-start px-2 text-sm font-semibold lg:px-4">
                 {/* dashboard */}
                 <div className="px-3 py-2 text-sm font-semibold text-foreground">Dashboard</div>
-                <NavLink url="#" title="Dashboard" icon={IconDashboard} />
+                <NavLink
+                    active={url.startsWith('/dashboard')}
+                    url={route('dashboard')}
+                    title="Dashboard"
+                    icon={IconDashboard}
+                />
 
                 {/* statistik */}
                 <div className="px-3 py-2 text-sm font-semibold text-foreground">Statistik</div>

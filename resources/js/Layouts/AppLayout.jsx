@@ -1,10 +1,11 @@
 import ApplicationLogo from '@/components/ApplicationLogo';
 import { Toaster } from '@/components/ui/sonner';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import Sidebar from './Partials/Sidebar';
 import SidebarResponsive from './Partials/SidebarResponsive';
 
 export default function AppLayout({ title, children }) {
+    const { url } = usePage();
     return (
         <>
             <Head title={title} />
@@ -18,7 +19,7 @@ export default function AppLayout({ title, children }) {
                         </div>
                         {/* sidebar */}
                         <div className="flex-1">
-                            <Sidebar />
+                            <Sidebar url={url} />
                         </div>
                         {/* sidebar end */}
                     </div>
@@ -26,7 +27,7 @@ export default function AppLayout({ title, children }) {
 
                 <div className="flex w-full flex-col lg:w-4/5">
                     {/* sidebar responseive  */}
-                    <SidebarResponsive />
+                    <SidebarResponsive url={url} />
                     {/* sidebar responseive end */}
 
                     <main className="w-full">
