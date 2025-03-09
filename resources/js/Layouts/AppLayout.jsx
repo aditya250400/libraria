@@ -1,11 +1,25 @@
 import ApplicationLogo from '@/components/ApplicationLogo';
+import { AvatarImage } from '@/Components/ui/avatar';
+import { Button } from '@/Components/ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Toaster } from '@/components/ui/sonner';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { Avatar, AvatarFallback } from '@radix-ui/react-avatar';
 import Sidebar from './Partials/Sidebar';
 import SidebarResponsive from './Partials/SidebarResponsive';
 
 export default function AppLayout({ title, children }) {
     const { url } = usePage();
+
+    const { user } = usePage().props.auth;
+
     return (
         <>
             <Head title={title} />
@@ -19,16 +33,39 @@ export default function AppLayout({ title, children }) {
                         </div>
                         {/* sidebar */}
                         <div className="flex-1">
-                            <Sidebar url={url} />
+                            <Sidebar url={url} user={user} />
                         </div>
                         {/* sidebar end */}
                     </div>
                 </div>
 
                 <div className="flex w-full flex-col lg:w-4/5">
-                    {/* sidebar responseive  */}
-                    <SidebarResponsive url={url} />
-                    {/* sidebar responseive end */}
+                    <header className="flex h-12 items-center justify-between gap-4 border-b px-4 lg:h-[60px] lg:justify-end lg:px-6">
+                        {/* sidebar responseive  */}
+                        <SidebarResponsive url={url} user={user} />
+                        {/* dropdown */}
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" className="flex gap-x-2">
+                                    <span>Hi, {user.name}</span>
+                                    <Avatar>
+                                        <AvatarImage src={user.avatar} />
+                                        <AvatarFallback>{user.name.substring(0, 1)}</AvatarFallback>
+                                    </Avatar>
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>Profile</DropdownMenuItem>
+                                <DropdownMenuItem asChild>
+                                    <Link href="#">Logout</Link>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                        {/* dropdown end */}
+                        {/* sidebar responseive end */}
+                    </header>
 
                     <main className="w-full">
                         <div className="relative">

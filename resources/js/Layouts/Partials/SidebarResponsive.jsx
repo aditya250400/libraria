@@ -1,17 +1,7 @@
 import ApplicationLogo from '@/components/ApplicationLogo';
 import NavLinkResponsive from '@/Components/NavLinkResponsive';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/Components/ui/sheet';
-import { Link } from '@inertiajs/react';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import {
     IconAlertCircle,
@@ -36,7 +26,7 @@ import {
     IconVersions,
 } from '@tabler/icons-react';
 
-export default function SidebarResponsive({ url }) {
+export default function SidebarResponsive({ url, user }) {
     return (
         <>
             <header className="flex h-12 items-center justify-between gap-4 border-b px-4 lg:h-[60px] lg:justify-end lg:px-6">
@@ -102,26 +92,6 @@ export default function SidebarResponsive({ url }) {
                         </nav>
                     </SheetContent>
                 </Sheet>
-                {/* dropdown */}
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="flex gap-x-2">
-                            <span>Hi, Luffy</span>
-                            <Avatar>
-                                <AvatarFallback>L</AvatarFallback>
-                            </Avatar>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <Link href="#">Logout</Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-                {/* dropdown end */}
             </header>
         </>
     );
