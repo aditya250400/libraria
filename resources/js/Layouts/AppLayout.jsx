@@ -50,7 +50,7 @@ export default function AppLayout({ title, children }) {
                                     <span>Hi, {user.name}</span>
                                     <Avatar>
                                         <AvatarImage src={user.avatar} />
-                                        <AvatarFallback>{user.name.substring(0, 1)}</AvatarFallback>
+                                        {user.avatar && <AvatarFallback>{user.name.substring(0, 1)}</AvatarFallback>}
                                     </Avatar>
                                 </Button>
                             </DropdownMenuTrigger>
