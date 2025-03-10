@@ -49,10 +49,8 @@ export default function Login({ status, canResetPassword }) {
                                         type="email"
                                         name="email"
                                         value={data.email}
-                                        className="mt-1 block w-full"
                                         autoComplete="username"
                                         placeholder="user@email.test"
-                                        isFocused={true}
                                         onChange={(e) => setData(e.target.name, e.target.value)}
                                     />
 
@@ -65,6 +63,7 @@ export default function Login({ status, canResetPassword }) {
                                             <Link
                                                 href={route('password.request')}
                                                 className="ml-auto inline-block text-sm underline"
+                                                tabIndex={-1}
                                             >
                                                 Lupa Password
                                             </Link>
@@ -75,7 +74,6 @@ export default function Login({ status, canResetPassword }) {
                                         type="password"
                                         name="password"
                                         value={data.password}
-                                        className="mt-1 block w-full"
                                         autoComplete="new-password"
                                         onChange={(e) => setData(e.target.name, e.target.value)}
                                     />
