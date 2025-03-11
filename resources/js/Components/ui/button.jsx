@@ -19,6 +19,8 @@ const buttonVariants = cva(
                 blue: 'hover:bg-accent hover:text-accent-foreground text-white bg-gradient-to-r from-blue-500 via-blue-500 to-blue-500',
                 green: 'text-white bg-gradient-to-r from-green-500 via-green-500 to-green-500',
                 purple: 'text-white bg-gradient-to-r from-purple-500 via-purple-500 to-purple-500 ',
+                orange: 'text-white bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500 ',
+                slate: 'text-white bg-gradient-to-r from-slate-500 via-slate-500 to-slate-500 ',
             },
             size: {
                 default: 'h-9 px-4 py-2',
