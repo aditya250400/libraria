@@ -20,13 +20,21 @@ import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, router } from '@inertiajs/react';
 import { AlertDialogCancel, AlertDialogTitle } from '@radix-ui/react-alert-dialog';
-import { IconCategory, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
+import { IconArrowsDownUp, IconCategory, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 export default function Index(props) {
     const { data: categories, meta } = props.categories;
     const [params, setParams] = useState(props.state);
+
+    const onSortable = (field) => {
+        setParams({
+            ...params,
+            field: field,
+            direction: params.direction === 'asc' ? 'desc' : 'asc',
+        });
+    };
 
     UseFilter({
         route: route('admin.categories.index'),
@@ -77,11 +85,55 @@ export default function Index(props) {
                         <Table className="w-full">
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>#</TableHead>
-                                    <TableHead>Nama</TableHead>
-                                    <TableHead>Slug</TableHead>
+                                    <TableHead>
+                                        <Button
+                                            variant="ghost"
+                                            className="group inline-flex"
+                                            onClick={() => onSortable('id')}
+                                        >
+                                            #
+                                            <span className="ml-2 flex-none rounded text-muted-foreground">
+                                                <IconArrowsDownUp className="size-4 text-muted-foreground" />
+                                            </span>
+                                        </Button>
+                                    </TableHead>
+                                    <TableHead>
+                                        <Button
+                                            variant="ghost"
+                                            className="group inline-flex"
+                                            onClick={() => onSortable('name')}
+                                        >
+                                            Name
+                                            <span className="ml-2 flex-none rounded text-muted-foreground">
+                                                <IconArrowsDownUp className="size-4 text-muted-foreground" />
+                                            </span>
+                                        </Button>
+                                    </TableHead>
+                                    <TableHead>
+                                        <Button
+                                            variant="ghost"
+                                            className="group inline-flex"
+                                            onClick={() => onSortable('slug')}
+                                        >
+                                            Slug
+                                            <span className="ml-2 flex-none rounded text-muted-foreground">
+                                                <IconArrowsDownUp className="size-4 text-muted-foreground" />
+                                            </span>
+                                        </Button>
+                                    </TableHead>
                                     <TableHead>Cover</TableHead>
-                                    <TableHead>Dibuat Pada</TableHead>
+                                    <TableHead>
+                                        <Button
+                                            variant="ghost"
+                                            className="group inline-flex"
+                                            onClick={() => onSortable('created_at')}
+                                        >
+                                            Dibuat Pada
+                                            <span className="ml-2 flex-none rounded text-muted-foreground">
+                                                <IconArrowsDownUp className="size-4 text-muted-foreground" />
+                                            </span>
+                                        </Button>
+                                    </TableHead>
                                     <TableHead>Aksi</TableHead>
                                 </TableRow>
                             </TableHeader>
