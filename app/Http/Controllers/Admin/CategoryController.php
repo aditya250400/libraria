@@ -18,6 +18,12 @@ class CategoryController extends Controller
     {
         $categories = Category::query()
             ->select(['id', 'name', 'slug', 'cover', 'created_at'])
+            ->when(request()->search, function ($query, $value) {
+                $query->whereAny([
+                    'name',
+                    'slug'
+                ], 'REGEXP', $value);
+            })
             ->orderBy('name')->paginate(10);
 
         return inertia('Admin/Categories/Index', [
@@ -26,7 +32,12 @@ class CategoryController extends Controller
             ]),
             'page_setting' => [
                 'title' => 'Kategori',
-                'subtitle' => 'Menampilkan semua data kategori yang tersedia pada platform ini'
+                'subtitle' => 'Menampilkan semua data kategori yang tersedia pada platform ini',
+                ''
+            ],
+            'state' => [
+                'page' => request()->page ?? 1,
+                'search' => request()->search ?? ''
             ]
         ]);
     }
