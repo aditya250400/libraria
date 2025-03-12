@@ -1,5 +1,5 @@
 import ApplicationLogo from '@/components/ApplicationLogo';
-import { AvatarImage } from '@/Components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
 import { Button } from '@/Components/ui/button';
 import {
     DropdownMenu,
@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Toaster } from '@/components/ui/sonner';
 import { Head, Link, usePage } from '@inertiajs/react';
-import { Avatar, AvatarFallback } from '@radix-ui/react-avatar';
 import Sidebar from './Partials/Sidebar';
 import SidebarResponsive from './Partials/SidebarResponsive';
 
