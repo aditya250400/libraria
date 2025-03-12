@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         $categories = Category::query()
             ->select(['id', 'name', 'slug', 'cover', 'created_at'])
-            ->get();
+            ->orderBy('name')->get();
 
         return inertia('Admin/Categories/Index', [
             'categories' => CategoryResource::collection($categories),
