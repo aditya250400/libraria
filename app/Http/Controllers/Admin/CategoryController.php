@@ -18,14 +18,9 @@ class CategoryController extends Controller
     {
         $categories = Category::query()
             ->select(['id', 'name', 'slug', 'cover', 'created_at'])
-            ->when(request()->search, function ($query, $value) {
-                $query->whereAny([
-                    'name',
-                    'slug'
-                ], 'REGEXP', $value);
-            })
-            ->when(request()->field && request()->direction, fn($query) => $query->orderBy(request()->field, request()->direction))
-            ->orderBy('name')->paginate(request()->load ?? 10)->withQueryString();
+            ->filter(request()->only(['search']))
+            ->sorting(request()->only(['field', 'direction']))
+            ->paginate(request()->load ?? 10)->withQueryString();
 
         return inertia('Admin/Categories/Index', [
             'categories' => CategoryResource::collection($categories)->additional([
@@ -34,7 +29,6 @@ class CategoryController extends Controller
             'page_setting' => [
                 'title' => 'Kategori',
                 'subtitle' => 'Menampilkan semua data kategori yang tersedia pada platform ini',
-                ''
             ],
             'state' => [
                 'page' => request()->page ?? 1,
