@@ -94,11 +94,12 @@ class PublisherController extends Controller
         try {
             $publisher->update([
                 'name' => $name = $request->name,
-                'slug' => str()->lower(str()->slug($name) . str()->random(4)),
+                'slug' => $name !== $publisher->name ? str()->lower(str()->slug($name) . str()->random(4)) : $publisher->slug,
                 'address' => $request->address,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'logo' => $this->upload_file($request, 'logo', 'publishers'),
+                'logo' => $this->update_file($request, $publisher, 'logo', 'categories'),
+
             ]);
             flashMessage(MessageType::UPDATED->message('Penerbit'));
             return to_route('admin.publishers.index');
@@ -108,12 +109,12 @@ class PublisherController extends Controller
         }
     }
 
-    public function destroy(Publisher $pubisher)
+    public function destroy(Publisher $publisher)
     {
         try {
-            $this->delete_file($pubisher, 'logo');
+            $this->delete_file($publisher, 'logo');
 
-            $pubisher->delete();
+            $publisher->delete();
 
             flashMessage(MessageType::DELETED->message('Penerbit'));
 
