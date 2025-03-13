@@ -8,6 +8,7 @@ import {
     AlertDialogHeader,
     AlertDialogTrigger,
 } from '@/Components/ui/alert-dialog';
+import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
@@ -117,6 +118,7 @@ export default function Index(props) {
                                             </span>
                                         </Button>
                                     </TableHead>
+                                    <TableHead>Logo</TableHead>
                                     <TableHead>
                                         <Button
                                             variant="ghost"
@@ -185,6 +187,12 @@ export default function Index(props) {
                                     <TableRow key={index}>
                                         <TableCell>{index + 1 + (meta.current_page - 1) * meta.per_page}</TableCell>
                                         <TableCell>{publisher.name}</TableCell>
+                                        <TableCell>
+                                            <Avatar>
+                                                <AvatarImage src={publisher.logo} />
+                                                <AvatarFallback>{publisher.name.substring(0, 1)}</AvatarFallback>
+                                            </Avatar>
+                                        </TableCell>
                                         <TableCell>{publisher.slug}</TableCell>
                                         <TableCell>{publisher.address}</TableCell>
                                         <TableCell>{publisher.email}</TableCell>
