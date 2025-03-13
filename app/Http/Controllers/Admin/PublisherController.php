@@ -21,6 +21,7 @@ class PublisherController extends Controller
             ->select('id', 'name', 'slug', 'email', 'slug', 'address', 'phone', 'created_at')
             ->filter(request()->only(['search']))
             ->sorting(request()->only(['field', 'direction']))
+            ->latest('created_at')
             ->paginate(request()->load ?? 10)
             ->withQueryString();
 
