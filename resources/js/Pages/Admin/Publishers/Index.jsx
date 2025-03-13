@@ -17,7 +17,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
 import { UseFilter } from '@/hooks/UseFilter';
 import AppLayout from '@/Layouts/AppLayout';
-import { Link } from '@inertiajs/react';
+import { flashMessage } from '@/lib/utils';
+import { Link, router } from '@inertiajs/react';
 import { AlertDialogCancel, AlertDialogTitle } from '@radix-ui/react-alert-dialog';
 import {
     IconArrowsDownUp,
@@ -28,6 +29,7 @@ import {
     IconTrash,
 } from '@tabler/icons-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function Index(props) {
     const { data: publishers, meta } = props.publishers;
@@ -218,28 +220,26 @@ export default function Index(props) {
                                                             </AlertDialogTitle>
                                                             <AlertDescription>
                                                                 Tindakan ini tidak dapat dibatalkan. Tindakan ini akan
-                                                                menghapus publisher ini dan semua data yang memiliki
-                                                                publisher ini secara permanen!
+                                                                menghapus penerbit ini dan semua data yang memiliki
+                                                                penerbit ini secara permanen!
                                                             </AlertDescription>
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
                                                             <AlertDialogCancel>Cancel</AlertDialogCancel>
                                                             <AlertDialogAction
                                                                 onClick={() =>
-                                                                    // router.delete(
-                                                                    //     route('admin.publishers.destroy', [publisher]),
-                                                                    //     {
-                                                                    //         preserveScroll: true,
-                                                                    //         preserveState: true,
-                                                                    //         onSuccess: (success) => {
-                                                                    //             const flash = flashMessage(success);
-                                                                    //             if (flash)
-                                                                    //                 toast[flash.type](flash.message);
-                                                                    //         },
-                                                                    //     },
-                                                                    // )
-
-                                                                    alert(`${publisher.name} terhapus`)
+                                                                    router.delete(
+                                                                        route('admin.publishers.destroy', [publisher]),
+                                                                        {
+                                                                            preserveScroll: true,
+                                                                            preserveState: true,
+                                                                            onSuccess: (success) => {
+                                                                                const flash = flashMessage(success);
+                                                                                if (flash)
+                                                                                    toast[flash.type](flash.message);
+                                                                            },
+                                                                        },
+                                                                    )
                                                                 }
                                                             >
                                                                 Continue
