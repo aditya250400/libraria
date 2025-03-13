@@ -18,7 +18,7 @@ class PublisherController extends Controller
     public function index()
     {
         $publishers = Publisher::query()
-            ->select('id', 'name', 'slug', 'email', 'slug', 'address', 'phone', 'created_at')
+            ->select('id', 'name', 'logo', 'email', 'slug', 'address', 'phone', 'created_at')
             ->filter(request()->only(['search']))
             ->sorting(request()->only(['field', 'direction']))
             ->latest('created_at')
@@ -73,6 +73,54 @@ class PublisherController extends Controller
             flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
             return back();
             // return to_route('admin.publishers.index');
+        }
+    }
+
+    public function edit(Publisher $publisher)
+    {
+        return inertia('Admin/Publishers/Edit', [
+            'page_setting' => [
+                'title' => 'Edit Penerbit',
+                'subtitle' => 'Edit penerbit di sini. Klik simpan setelah selesai',
+                'method' => 'PUT',
+                'action' => route('admin.publishers.update', $publisher)
+            ],
+            'publisher' => $publisher
+        ]);
+    }
+
+    public function update(Publisher $publisher, PublisherRequest $request)
+    {
+        try {
+            $publisher->update([
+                'name' => $name = $request->name,
+                'slug' => str()->lower(str()->slug($name) . str()->random(4)),
+                'address' => $request->address,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'logo' => $this->upload_file($request, 'logo', 'publishers'),
+            ]);
+            flashMessage(MessageType::UPDATED->message('Penerbit'));
+            return to_route('admin.publishers.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.publishers.index');
+        }
+    }
+
+    public function destroy(Publisher $pubisher)
+    {
+        try {
+            $this->delete_file($pubisher, 'logo');
+
+            $pubisher->delete();
+
+            flashMessage(MessageType::DELETED->message('Penerbit'));
+
+            return to_route('admin.publishers.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.publishers.index');
         }
     }
 }
