@@ -258,7 +258,7 @@ export default function Index(props) {
                         <p className="mb-2 text-sm text-muted-foreground">
                             Menampilkan{' '}
                             <span className="font-meidum text-blue-500">
-                                {meta.from ?? 0} dari {meta.total} penerbit
+                                {meta.to ?? 0} dari {meta.total} penerbit
                             </span>
                         </p>
                         <div className="overflow-x-auto">
