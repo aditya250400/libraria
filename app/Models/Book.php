@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\BookLanguage;
 use App\Enums\BookStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
@@ -37,5 +38,30 @@ class Book extends Model
     public function publisher()
     {
         return $this->belongsTo(Publisher::class);
+    }
+
+    public function scopeFilter(Builder $query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->whereAny([
+                    'book_code',
+                    'title',
+                    'slug',
+                    'author',
+                    'publication_year',
+                    'isbn',
+                    'language',
+                    'status'
+                ], 'REGEXP', $search);
+            });
+        });
+    }
+
+    public function scopeSorting(Builder $query, array $sorts)
+    {
+        $query->when($sorts['field'] ?? null && $sorts['direction'] ?? null, function ($query) use ($sorts) {
+            $query->orderBy($sorts['field'], $sorts['direction']);
+        });
     }
 }
