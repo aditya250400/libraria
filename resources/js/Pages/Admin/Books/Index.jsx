@@ -311,7 +311,7 @@ export default function Index(props) {
                                                                     //         },
                                                                     //     },
                                                                     // )
-                                                                    alert('oke ' + book.name)
+                                                                    alert('oke ' + book.title)
                                                                 }
                                                             >
                                                                 Continue

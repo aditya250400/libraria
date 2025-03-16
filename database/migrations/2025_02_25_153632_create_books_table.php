@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->nullable();
             $table->string('author');
+            $table->string('cover')->nullable();
             $table->unsignedInteger('publication_year');
             $table->string('isbn');
             $table->string('language')->default(BookLanguage::INDONESIA->value);
