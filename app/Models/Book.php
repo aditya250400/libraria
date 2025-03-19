@@ -4,8 +4,12 @@ namespace App\Models;
 
 use App\Enums\BookLanguage;
 use App\Enums\BookStatus;
+use App\Observers\BookObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+
+#[ObservedBy(BookObserver::class)]
 
 class Book extends Model
 {

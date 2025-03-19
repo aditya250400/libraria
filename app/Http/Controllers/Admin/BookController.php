@@ -72,7 +72,7 @@ class BookController extends Controller
     public function store(BookRequest $request)
     {
         try {
-            Book::create([
+            $book = Book::create([
                 'book_code' => str()->random(6),
                 'title' => $title = $request->title,
                 'slug' => str()->lower(str()->slug($title) . str()->random(4)),
@@ -88,6 +88,8 @@ class BookController extends Controller
                 'category_id' => $request->category_id,
                 'publisher_id' => $request->publisher_id,
             ]);
+
+
 
             flashMessage(MessageType::CREATED->message('Book'));
 
