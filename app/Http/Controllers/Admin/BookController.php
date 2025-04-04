@@ -101,6 +101,62 @@ class BookController extends Controller
         }
     }
 
+    public function edit(Book $book)
+    {
+        return inertia('Admin/Books/Edit', [
+            'page_setting' => [
+                'title' => 'Edit Buku',
+                'subtitle' => 'Edut buku baru disini. Klik simpan setelah selesai',
+                'method' => 'PUT',
+                'action' => route('admin.books.update', $book)
+            ],
+            'book' => $book,
+            'page_data' => [
+                'publicationYears' => range(2000, now()->year),
+                'languages' => BookLanguage::options(),
+                'categories' => Category::query()->select(['id', 'name'])->get()->map(fn($item) => [
+                    'value' => $item->id,
+                    'label' => $item->name
+                ]),
+                'publishers' => Publisher::query()->select(['id', 'name'])->get()->map(fn($item) => [
+                    'value' => $item->id,
+                    'label' => $item->name
+                ]),
+            ]
+        ]);
+    }
+    public function update(Book $book, BookRequest $request)
+    {
+        try {
+            $book->update([
+                'book_code' => $this->bookCode($request->publication_year, $request->category_id),
+                'title' => $title = $request->title,
+                'slug' => $title != $book->title ? str()->lower(str()->slug($title) . str()->random(4)) : $book->slug,
+                'author' => $request->author,
+                'publication_year' => $request->publication_year,
+                'isbn' => $request->isbn,
+                'language' => $request->language,
+                'synopsis' => $request->synopsis,
+                'number_of_pages' => $request->number_of_pages,
+                'status' => $request->total > 0 ? BookStatus::AVAILABLE->value : BookStatus::UNAVAILABLE->value,
+                'cover' => $this->update_file($request, $book, 'cover', 'books'),
+                'price' => $request->price,
+                'category_id' => $request->category_id,
+                'publisher_id' => $request->publisher_id,
+            ]);
+
+
+
+            flashMessage(MessageType::UPDATED->message('Book'));
+
+            return to_route('admin.books.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return back();
+            // return to_route('admin.books.index');
+        }
+    }
+
     private function bookCode(int $publication_year, $category_id)
     {
         $category = Category::find($category_id);
