@@ -47,7 +47,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // fine setting
     Route::controller(FineSettingController::class)->group(function () {
-        Route::get('fine-setting/create', 'create')->name('admin.fine-setting.create');
-        Route::put('fine-setting/create', 'store')->name('admin.fine-setting.store');
+        Route::get('fine-settings/create', 'create')->name('admin.fine-settings.create');
+        Route::put('fine-settings/create', 'store')->name('admin.fine-settings.store');
     });
 });
