@@ -17,10 +17,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
 import { UseFilter } from '@/hooks/UseFilter';
 import AppLayout from '@/Layouts/AppLayout';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { AlertDialogCancel, AlertDialogTitle } from '@radix-ui/react-alert-dialog';
 import { IconArrowsDownUp, IconBooks, IconPencil, IconPlus, IconRefresh, IconTrash } from '@tabler/icons-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function Index(props) {
     const { data: books, meta } = props.books;
@@ -299,19 +300,18 @@ export default function Index(props) {
                                                             <AlertDialogCancel>Cancel</AlertDialogCancel>
                                                             <AlertDialogAction
                                                                 onClick={() =>
-                                                                    // router.delete(
-                                                                    //     route('admin.books.destroy', [publisher]),
-                                                                    //     {
-                                                                    //         preserveScroll: true,
-                                                                    //         preserveState: true,
-                                                                    //         onSuccess: (success) => {
-                                                                    //             const flash = flashMessage(success);
-                                                                    //             if (flash)
-                                                                    //                 toast[flash.type](flash.message);
-                                                                    //         },
-                                                                    //     },
-                                                                    // )
-                                                                    alert('oke ' + book.title)
+                                                                    router.delete(
+                                                                        route('admin.books.destroy', [book]),
+                                                                        {
+                                                                            preserveScroll: true,
+                                                                            preserveState: true,
+                                                                            onSuccess: (success) => {
+                                                                                const flash = flashMessage(success);
+                                                                                if (flash)
+                                                                                    toast[flash.type](flash.message);
+                                                                            },
+                                                                        },
+                                                                    )
                                                                 }
                                                             >
                                                                 Continue

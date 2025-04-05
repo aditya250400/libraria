@@ -157,6 +157,22 @@ class BookController extends Controller
         }
     }
 
+    public function destroy(Book $book)
+    {
+        try {
+            $this->delete_file($book, 'cover');
+
+            $book->delete();
+
+            flashMessage(MessageType::DELETED->message('Buku'));
+
+            return to_route('admin.books.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.books.index');
+        }
+    }
+
     private function bookCode(int $publication_year, $category_id)
     {
         $category = Category::find($category_id);
