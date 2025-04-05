@@ -94,7 +94,7 @@ export default function Register() {
                                             name="password_confirmation"
                                             value={data.password_confirmation}
                                             autoComplete="new-password_confirmation"
-                                            type="password_confirmation"
+                                            type="password"
                                             onChange={onHandleChange}
                                         />
                                         {errors.password_confirmation && (
