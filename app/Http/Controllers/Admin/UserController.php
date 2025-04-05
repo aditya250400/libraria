@@ -67,6 +67,7 @@ class UserController extends Controller
                 'username' => usernameGenerator($name),
                 'email' => $request->email,
                 'gender' => $request->gender,
+                'date_of_birth' => $request->date_of_birth,
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
                 'avatar' => $this->upload_file($request, 'avatar', 'users'),
@@ -80,6 +81,44 @@ class UserController extends Controller
             flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
             return back();
             // return to_route('admin.users.index');
+        }
+    }
+
+    public function edit(User $user)
+    {
+        return inertia('Admin/Users/Edit', [
+            'page_setting' => [
+                'title' => 'Edit Pengguna',
+                'subtitle' => 'Edit Pengguna di sini. Klik simpan setelah selesai',
+                'method' => 'PUT',
+                'action' => route('admin.users.update', $user)
+            ],
+            'user' => $user,
+            'genders' => UserGender::options(),
+
+        ]);
+    }
+
+    public function update(User $user, UserRequest $request)
+    {
+        try {
+            $user->update([
+                'name' => $name = $request->name,
+                'username' => usernameGenerator($name),
+                'email' => $request->email,
+                'gender' => $request->gender,
+                'date_of_birth' => $request->date_of_birth,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'avatar' => $this->update_file($request, $user, 'avatar', 'users'),
+                'address' => $request->address,
+
+            ]);
+            flashMessage(MessageType::UPDATED->message('Pengguna'));
+            return to_route('admin.users.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.users.index');
         }
     }
 }
