@@ -239,8 +239,8 @@ export default function Index(props) {
                                                             </AlertDialogTitle>
                                                             <AlertDescription>
                                                                 Tindakan ini tidak dapat dibatalkan. Tindakan ini akan
-                                                                menghapus penerbit ini dan semua data yang memiliki
-                                                                penerbit ini secara permanen!
+                                                                menghapus pengguna ini dan semua data yang dimiliki
+                                                                pengguna ini secara permanen!
                                                             </AlertDescription>
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
