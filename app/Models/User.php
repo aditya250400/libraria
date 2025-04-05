@@ -53,6 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'gender' => UserGender::class,
+            'date_of_birth' => 'date',
         ];
     }
 }
