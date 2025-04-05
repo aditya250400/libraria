@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\UserGender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class UserRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class UserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -40,6 +42,11 @@ class UserRequest extends FormRequest
             'phone' => 'nullable|min:10|max:15',
             'avatar' => 'nullable|mimes:png,jpg|max:2048',
             'birth_of_birth' => 'nullable|date',
+            'gender' =>  [
+                'required',
+                new Enum(UserGender::class),
+
+            ],
             'address' => 'nullable|string|min:3|max:255'
 
         ];
