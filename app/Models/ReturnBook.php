@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ReturnBookStatus;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -90,5 +91,15 @@ class ReturnBook extends Model
     public function scopeMember(Builder $query, $user_id)
     {
         return $query->where('user_id', $user_id);
+    }
+
+    public function isOnTime()
+    {
+        return Carbon::today()->lessThanOrEqualTo(Carbon::parse($this->loan->due_date));
+    }
+
+    public function getDaysLate()
+    {
+        return max(0, Carbon::parse($this->loan->loan_date)->diffInDays(Carbon::parse($this->return_date)));
     }
 }
