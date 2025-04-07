@@ -92,6 +92,13 @@ class ReturnBookController extends Controller
                     'condition' => $request->condition,
                     'notes' => $request->notes,
                 ]);
+
+                match ($return_book_check->condition->value) {
+                    ReturnBookCondition::GOOD->value => $return_book->book->stock_loan_return(),
+                    ReturnBookCondition::LOST->value => $return_book->book->stock_lost(),
+                    ReturnBookCondition::DAMAGE->value => $return_book->book->stock_damaged(),
+                    default => flashMessage('Kondisi Buku Tidak sesuai', 'error'),
+                };
                 flashMessage('Berhasil mengembalikan buku');
 
                 return to_route('admin.return-books.index');
