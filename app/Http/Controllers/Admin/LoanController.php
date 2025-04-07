@@ -82,6 +82,11 @@ class LoanController extends Controller
             $book = Book::query()->where('title', $request->book)->firstOrFail();
             $user = User::query()->where('name', $request->user)->firstOrFail();
 
+            if (Loan::checkLoanBook($user->id, $book->id)) {
+                flashMessage('Pengguna sudah meminjam buku ini', 'error');
+                return back();
+            }
+
             Loan::create([
                 'loan_code' => str()->lower(str()->random(10)),
                 'user_id' => $user->id,
@@ -139,6 +144,11 @@ class LoanController extends Controller
 
             $book = Book::query()->where('title', $request->book)->firstOrFail();
             $user = User::query()->where('name', $request->user)->firstOrFail();
+
+            if (Loan::checkLoanBook($user->id, $book->id)) {
+                flashMessage('Pengguna sudah meminjam buku ini', 'error');
+                return back();
+            }
 
             $loan->update([
                 'user_id' => $user->id,
