@@ -100,4 +100,60 @@ class LoanController extends Controller
             // return to_route('admin.loans.index');
         }
     }
+
+    public function edit(Loan $loan)
+    {
+        return inertia('Admin/Loans/Edit', [
+            'page_setting' => [
+                'title' => 'Edit Peminjaman',
+                'subtitle' => 'Edit Peminjaman di sini. Klik simpan setelah selesai',
+                'method' => 'PUT',
+                'action' => route('admin.loans.update', $loan)
+            ],
+            'page_data' => [
+                'loan' => $loan->load(['user', 'book']),
+                'date' => [
+                    'loan_date' => Carbon::now()->toDateString(),
+                    'due_date' => Carbon::now()->addDays(7)->toDateString()
+                ],
+                'books' => Book::query()->select(['id', 'title'])
+                    ->whereHas('stock', fn($query) => $query->where('available', '>', 0))->get()->map((fn($item) => [
+                        'value' => $item->title,
+                        'label' => $item->title
+                    ])),
+                'users' => User::query()
+                    ->select(['id', 'name'])
+                    ->orderBy('name')
+                    ->get()
+                    ->map(fn($item) => [
+                        'value' => $item->name,
+                        'label' => $item->name
+                    ])
+            ],
+        ]);
+    }
+
+    public function update(Loan $loan, LoanRequest $request)
+    {
+        try {
+
+            $book = Book::query()->where('title', $request->book)->firstOrFail();
+            $user = User::query()->where('name', $request->user)->firstOrFail();
+
+            $loan->update([
+                'user_id' => $user->id,
+                'book_id' => $book->id,
+
+            ]);
+
+            flashMessage(MessageType::UPDATED->message('Peminjaman'));
+
+            return to_route('admin.loans.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.loans.index');
+
+            // return to_route('admin.loans.index');
+        }
+    }
 }
