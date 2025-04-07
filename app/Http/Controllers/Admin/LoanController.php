@@ -2,10 +2,102 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\MessageType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\LoanRequest;
+use App\Http\Resources\Admin\LoanResource;
+use App\Models\Book;
+use App\Models\Loan;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Throwable;
 
 class LoanController extends Controller
 {
-    //
+    public function index()
+    {
+        $loans = Loan::query()
+            ->select(['id', 'loan_code', 'user_id', 'book_id', 'loan_date', 'due_date', 'created_at'])
+            ->filter(request()->only(['search']))
+            ->sorting(request()->only(['field', 'direction']))
+            ->with(['book', 'user', 'returnBook'])
+            ->latest()
+            ->paginate(request()->load ?? 10)->withQueryString();
+
+        return inertia('Admin/Loans/Index', [
+            'page_setting' => [
+                'title' => 'Peminjaman',
+                'subtitle' => 'Menampilkan semua data peminjaman yang tersedia pada platform ini'
+            ],
+            'loans' => LoanResource::collection($loans)->additional([
+                'meta' => [
+                    'has_pages' => $loans->hasPages()
+                ],
+            ]),
+            'state' => [
+                'page' => request()->page ?? 1,
+                'search' => request()->search ?? '',
+                'load' => 10
+            ],
+        ]);
+    }
+
+    public function create()
+    {
+
+        return inertia('Admin/Loans/Create', [
+            'page_setting' => [
+                'title' => 'Tambah Peminjaman',
+                'subtitle' => 'Buat Peminjaman Buku di sini. Klik simpan setelah selesai',
+                'method' => 'POST',
+                'action' => route('admin.loans.store'),
+            ],
+            'page_data' => [
+                'date' => [
+                    'loan_date' => Carbon::now()->toDateString(),
+                    'due_date' => Carbon::now()->addDays(7)->toDateString()
+                ],
+                'books' => Book::query()->select(['id', 'title'])
+                    ->whereHas('stock', fn($query) => $query->where('available', '>', 0))->get()->map((fn($item) => [
+                        'value' => $item->title,
+                        'label' => $item->title
+                    ])),
+                'users' => User::query()
+                    ->select(['id', 'name'])
+                    ->orderBy('name')
+                    ->get()
+                    ->map(fn($item) => [
+                        'value' => $item->name,
+                        'label' => $item->name
+                    ])
+            ],
+        ]);
+    }
+
+    public function store(LoanRequest $request)
+    {
+        try {
+
+            $book = Book::query()->where('title', $request->book)->firstOrFail();
+            $user = User::query()->where('name', $request->user)->firstOrFail();
+
+            Loan::create([
+                'loan_code' => str()->lower(str()->random(10)),
+                'user_id' => $user->id,
+                'book_id' => $book->id,
+                'loan_date' => Carbon::now()->toDateString(),
+                'due_date' => Carbon::now()->addDays(7)->toDateString(),
+            ]);
+
+            flashMessage(MessageType::CREATED->message('Peminjaman'));
+
+            return to_route('admin.loans.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.loans.index');
+
+            // return to_route('admin.loans.index');
+        }
+    }
 }

@@ -10,7 +10,7 @@ class Loan extends Model
     protected $guarded = [];
 
 
-    protected $cast = [
+    protected $casts = [
         'loan_date' => 'date',
         'due_date' => 'date',
     ];
