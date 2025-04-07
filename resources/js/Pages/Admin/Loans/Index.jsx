@@ -19,7 +19,15 @@ import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, router } from '@inertiajs/react';
 import { AlertDialogCancel, AlertDialogTitle } from '@radix-ui/react-alert-dialog';
-import { IconArrowsDownUp, IconCreditCardPay, IconPencil, IconPlus, IconRefresh, IconTrash } from '@tabler/icons-react';
+import {
+    IconArrowsDownUp,
+    IconCreditCardPay,
+    IconCreditCardRefund,
+    IconPencil,
+    IconPlus,
+    IconRefresh,
+    IconTrash,
+} from '@tabler/icons-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -187,6 +195,13 @@ export default function Index(props) {
                                         <TableCell>{loan.created_at}</TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-x-1">
+                                                {!loan.has_return_book && (
+                                                    <Button asChild variant="purple" size="sm">
+                                                        <Link href={route('admin.return-books.create', [loan])}>
+                                                            <IconCreditCardRefund className="size-4" />
+                                                        </Link>
+                                                    </Button>
+                                                )}
                                                 <Button variant="slate" size="sm" asChild>
                                                     <Link href={route('admin.loans.edit', [loan])}>
                                                         <IconPencil size="4" />

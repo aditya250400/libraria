@@ -201,7 +201,6 @@ export default function Index(props) {
                                         <TableCell>{index + 1 + (meta.current_page - 1) * meta.per_page}</TableCell>
                                         <TableCell>{return_book.return_book_code}</TableCell>
                                         <TableCell>{return_book.loan.loan_code}</TableCell>
-                                        <TableCell>{return_book.loan.loan_code}</TableCell>
                                         <TableCell>{return_book.user.name}</TableCell>
                                         <TableCell>{return_book.book.title}</TableCell>
                                         <TableCell>{return_book.status}</TableCell>
