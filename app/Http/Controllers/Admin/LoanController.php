@@ -156,4 +156,20 @@ class LoanController extends Controller
             // return to_route('admin.loans.index');
         }
     }
+
+
+    public function destroy(Loan $loan)
+    {
+        try {
+
+            $loan->delete();
+
+            flashMessage(MessageType::DELETED->message('Peminjaman'));
+
+            return to_route('admin.loans.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.loans.index');
+        }
+    }
 }

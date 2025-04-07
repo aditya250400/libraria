@@ -214,7 +214,7 @@ export default function Index(props) {
                                                             <AlertDialogAction
                                                                 onClick={() =>
                                                                     router.delete(
-                                                                        route('admin.loans.destroy', [category]),
+                                                                        route('admin.loans.destroy', [loan]),
                                                                         {
                                                                             preserveScroll: true,
                                                                             preserveState: true,
