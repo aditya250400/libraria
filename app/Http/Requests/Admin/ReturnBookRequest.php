@@ -36,6 +36,6 @@ class ReturnBookRequest extends FormRequest
     {
         return [
             'condition' => "Kondisi",
-        ]
+        ];
     }
 }
