@@ -14,4 +14,15 @@ class Fine extends Model
         'fine_date' => 'date',
 
     ];
+
+
+    public function returnBook()
+    {
+        return $this->belongsTo(ReturnBook::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
