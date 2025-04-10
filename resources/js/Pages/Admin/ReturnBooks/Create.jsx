@@ -136,6 +136,7 @@ export default function Create(props) {
                                     name="loan_code"
                                     id="loan_code"
                                     type="text"
+                                    disabled
                                     value={data.loan_code}
                                     onChange={onHandleChange}
                                 />

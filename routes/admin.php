@@ -73,6 +73,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // fine
     Route::controller(FineController::class)->group(function () {
-        Route::get('fines/{return_book_code}/create', 'create')->name('admin.fines.create');
+        Route::get('fines/{returnBook:return_book_code}/create', 'create')->name('admin.fines.create');
     });
 });
