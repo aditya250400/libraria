@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\LoanController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Admin\ReturnBookController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -74,5 +75,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // fine
     Route::controller(FineController::class)->group(function () {
         Route::get('fines/{returnBook:return_book_code}/create', 'create')->name('admin.fines.create');
+    });
+
+    // Announcement
+    Route::controller(AnnouncementController::class)->group(function () {
+        Route::get('announcements', 'index')->name('admin.announcements.index');
+        Route::get('announcements/create', 'create')->name('admin.announcements.create');
+        Route::post('announcements/create', 'store')->name('admin.announcements.store');
+        Route::get('announcements/edit/{announcement}', 'edit')->name('admin.announcements.edit');
+        Route::put('announcements/edit/{announcement}', 'update')->name('admin.announcements.update');
+        Route::delete('announcements/destroy/{announcement}', 'destroy')->name('admin.announcements.destroy');
     });
 });
