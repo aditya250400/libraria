@@ -17,12 +17,10 @@ import { flashMessage } from '@/lib/utils';
 import { Link, router } from '@inertiajs/react';
 import { AlertDialogCancel, AlertDialogTitle } from '@radix-ui/react-alert-dialog';
 import { IconAlertCircle, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
-import { useState } from 'react';
 import { toast } from 'sonner';
 
 export default function Index(props) {
     const { data: announcements, meta } = props.announcements;
-    const [params, setParams] = useState(props.state);
 
     return (
         <>
@@ -60,7 +58,7 @@ export default function Index(props) {
                                         <TableCell>{index + 1 + (meta.current_page - 1) * meta.per_page}</TableCell>
                                         <TableCell>{announcement.message}</TableCell>
                                         <TableCell>{announcement.url}</TableCell>
-                                        <TableCell>{announcement.url}</TableCell>
+                                        <TableCell>{announcement.is_active}</TableCell>
                                         <TableCell>{announcement.created_at}</TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-x-1">
