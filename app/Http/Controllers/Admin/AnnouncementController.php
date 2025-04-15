@@ -106,4 +106,19 @@ class AnnouncementController extends Controller
             // return to_route('admin.announcements.index');
         }
     }
+
+    public function destroy(Announcement $announcement)
+    {
+        try {
+
+            $announcement->delete();
+
+            flashMessage(MessageType::DELETED->message('Pengumuman'));
+
+            return to_route('admin.announcements.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.announcements.index');
+        }
+    }
 }

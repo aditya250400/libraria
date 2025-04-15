@@ -80,8 +80,7 @@ export default function Index(props) {
                                                             </AlertDialogTitle>
                                                             <AlertDescription>
                                                                 Tindakan ini tidak dapat dibatalkan. Tindakan ini akan
-                                                                menghapus kategori ini dan semua data yang memiliki
-                                                                kategori ini secara permanen!
+                                                                menghapus pengumuman secara permanen!
                                                             </AlertDescription>
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
