@@ -1,4 +1,5 @@
 import ApplicationLogo from '@/components/ApplicationLogo';
+import Banner from '@/Components/Banner';
 import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
 import { Button } from '@/Components/ui/button';
 import {
@@ -19,14 +20,16 @@ export default function AppLayout({ title, children }) {
 
     const { user } = usePage().props.auth;
 
+    const announcement = usePage().props.announcement;
+
     return (
         <>
             <Head title={title} />
             <Toaster position="top-center" richColors />
 
-            <div className="flex min-h-screen w-full">
+            <div className="flex w-full min-h-screen">
                 <div className="hidden w-1/5 border-r lg:block">
-                    <div className="flex h-full min-h-screen flex-col gap-2">
+                    <div className="flex flex-col h-full min-h-screen gap-2">
                         <div className="flex h-14 border-b px-4 lg:h-[60px] lg:px-6">
                             <ApplicationLogo />
                         </div>
@@ -38,7 +41,7 @@ export default function AppLayout({ title, children }) {
                     </div>
                 </div>
 
-                <div className="flex w-full flex-col lg:w-4/5">
+                <div className="flex flex-col w-full lg:w-4/5">
                     <header className="flex h-12 items-center justify-between gap-4 border-b px-4 lg:h-[60px] lg:justify-end lg:px-6">
                         {/* sidebar responseive  */}
                         <SidebarResponsive url={url} user={user} />
@@ -81,7 +84,7 @@ export default function AppLayout({ title, children }) {
                         <div className="relative">
                             {/* background */}
                             <div
-                                className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                                className="absolute inset-x-0 overflow-hidden -top-40 -z-10 transform-gpu blur-3xl sm:-top-80"
                                 aria-hidden="true"
                             >
                                 <div
@@ -92,7 +95,13 @@ export default function AppLayout({ title, children }) {
                                     }}
                                 />
                             </div>
-                            <div className="gap-4 p-4 lg:gap-6">{children}</div>
+                            <div className="gap-4 p-4 lg:gap-6">
+                                {children}
+
+                                {announcement && announcement.is_active == 1 && (
+                                    <Banner message={announcement.message} url={announcement.url} />
+                                )}
+                            </div>
                             {/* background end */}
                         </div>
                     </main>
