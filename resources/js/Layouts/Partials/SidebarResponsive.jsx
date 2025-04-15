@@ -37,7 +37,7 @@ export default function SidebarResponsive({ url, user }) {
                             <IconLayoutSidebar className="size-5" />
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="left" className="flex max-h-screen flex-col overflow-y-auto">
+                    <SheetContent side="left" className="flex flex-col max-h-screen overflow-y-auto">
                         <SheetHeader>
                             <SheetTitle>
                                 <VisuallyHidden.Root>Sidebar Responsive</VisuallyHidden.Root>
@@ -120,7 +120,12 @@ export default function SidebarResponsive({ url, user }) {
                                 />
                                 {/* Lainnya */}
                                 <div className="px-3 py-2 text-sm font-semibold text-foreground">Lainnya</div>
-                                <NavLinkResponsive url="#" title="Pengumuman" icon={IconAlertCircle} />
+                                <NavLinkResponsive
+                                    url={route('admin.announcements.index')}
+                                    active={url.startsWith('/admin/announcements')}
+                                    title="Pengumuman"
+                                    icon={IconAlertCircle}
+                                />
                                 <NavLinkResponsive url={route('profile.edit')} title="Profile" icon={IconUser} />
                                 <NavLinkResponsive
                                     url={route('logout')}

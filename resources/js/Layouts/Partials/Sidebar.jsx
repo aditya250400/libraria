@@ -24,7 +24,7 @@ import NavLink from '../../Components/NavLink';
 export default function Sidebar({ url, user }) {
     return (
         <>
-            <nav className="sticky top-2 grid items-start px-2 text-sm font-semibold lg:px-4">
+            <nav className="sticky grid items-start px-2 text-sm font-semibold top-2 lg:px-4">
                 {/* dashboard */}
                 <div className="px-3 py-2 text-sm font-semibold text-foreground">Dashboard</div>
                 <NavLink
@@ -94,7 +94,12 @@ export default function Sidebar({ url, user }) {
                 />
                 {/* Lainnya */}
                 <div className="px-3 py-2 text-sm font-semibold text-foreground">Lainnya</div>
-                <NavLink url="#" title="Pengumuman" icon={IconAlertCircle} />
+                <NavLink
+                    url={route('admin.announcements.index')}
+                    active={url.startsWith('/admin/announcements')}
+                    title="Pengumuman"
+                    icon={IconAlertCircle}
+                />
                 <NavLink url={route('profile.edit')} title="Profile" icon={IconUser} />
                 <NavLink
                     url={route('logout')}
