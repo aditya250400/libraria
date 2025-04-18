@@ -93,8 +93,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::get('roles', 'index')->name('admin.roles.index');
         Route::get('roles/create', 'create')->name('admin.roles.create');
         Route::post('roles/create', 'store')->name('admin.roles.store');
-        Route::get('roles/edit/{roles}', 'edit')->name('admin.roles.edit');
-        Route::put('roles/edit/{roles}', 'update')->name('admin.roles.update');
-        Route::delete('roles/destroy/{roles}', 'destroy')->name('admin.roles.destroy');
+        Route::get('roles/edit/{role}', 'edit')->name('admin.roles.edit');
+        Route::put('roles/edit/{role}', 'update')->name('admin.roles.update');
+        Route::delete('roles/destroy/{role}', 'destroy')->name('admin.roles.destroy');
     });
 });
