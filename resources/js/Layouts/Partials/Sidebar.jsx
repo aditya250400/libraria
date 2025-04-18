@@ -79,7 +79,12 @@ export default function Sidebar({ url, user }) {
                     title="Peran"
                     icon={IconVersions}
                 />
-                <NavLink url="#" title="Izin" icon={IconCircleKey} />
+                <NavLink
+                    url={route('admin.permissions.index')}
+                    active={url.startsWith('/admin/permissions')}
+                    title="Izin"
+                    icon={IconCircleKey}
+                />
                 <NavLink url="#" title="Tetapkan Izin" icon={IconKeyframe} />
                 <NavLink url="#" title="Tetapkan Peran" icon={IconLayoutKanban} />
                 <NavLink url="#" title="Akses Rute" icon={IconRoute} />
