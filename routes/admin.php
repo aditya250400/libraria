@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ReturnBookController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AssignPermissionController;
+use App\Http\Controllers\Admin\AssignUserController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -115,5 +116,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::get('assign-permissions', 'index')->name('admin.assign-permissions.index');
         Route::get('assign-permissions/edit/{role}', 'edit')->name('admin.assign-permissions.edit');
         Route::put('assign-permissions/edit/{role}', 'update')->name('admin.assign-permissions.update');
+    });
+
+    // Assign Users
+    Route::controller(AssignUserController::class)->group(function () {
+        Route::get('assign-users', 'index')->name('admin.assign-users.index');
+        Route::get('assign-users/edit/{users}', 'edit')->name('admin.assign-users.edit');
+        Route::put('assign-users/edit/{users}', 'update')->name('admin.assign-users.update');
     });
 });
