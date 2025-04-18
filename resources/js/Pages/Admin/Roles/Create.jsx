@@ -4,7 +4,6 @@ import { Button } from '@/Components/ui/button';
 import { Card, CardContent } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
 import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, useForm } from '@inertiajs/react';
@@ -67,11 +66,11 @@ export default function Create(props) {
                                     id="name"
                                     type="text"
                                     onChange={onHandleChange}
-                                    placeholder="Masukan nama..."
+                                    placeholder="Masukan nama peran.."
                                 />
                                 {errors.name && <InputError message={errors.name} />}
                             </div>
-                            <div className="grid w-full gap-1.5">
+                            {/* <div className="grid w-full gap-1.5">
                                 <Label htmlFor="name">Guard</Label>
                                 <Select
                                     defaultValue={data.guard_name}
@@ -91,7 +90,7 @@ export default function Create(props) {
                                     </SelectContent>
                                 </Select>
                                 {errors.guard_name && <InputError message={errors.guard_name} />}
-                            </div>
+                            </div> */}
 
                             <div className="flex justify-end gap-x-2">
                                 {(data.name != '' || data.description != '' || data.cover != null) && (
