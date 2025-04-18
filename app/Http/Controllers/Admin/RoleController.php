@@ -102,4 +102,19 @@ class RoleController extends Controller
             // return to_route('admin.roles.index');
         }
     }
+
+    public function destroy(Role $role)
+    {
+        try {
+
+            $role->delete();
+
+            flashMessage(MessageType::DELETED->message('Peran'));
+
+            return to_route('admin.roles.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return to_route('admin.roles.index');
+        }
+    }
 }
