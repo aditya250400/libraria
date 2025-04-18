@@ -100,7 +100,12 @@ export default function SidebarResponsive({ url, user }) {
                                 {/* Peran dan Izin */}
                                 <div className="px-3 py-2 text-sm font-semibold text-foreground">Peran dan Izin</div>
                                 <NavLinkResponsive url="#" title="Izin" icon={IconCircleKey} />
-                                <NavLinkResponsive url="#" title="Peran" icon={IconVersions} />
+                                <NavLinkResponsive
+                                    url={route('admin.roles.index')}
+                                    active={url.startsWith('/admin/roles')}
+                                    title="Peran"
+                                    icon={IconVersions}
+                                />
                                 <NavLinkResponsive url="#" title="Tetapkan Izin" icon={IconKeyframe} />
                                 <NavLinkResponsive url="#" title="Tetapkan Peran" icon={IconLayoutKanban} />
                                 <NavLinkResponsive url="#" title="Akses Rute" icon={IconRoute} />

@@ -8,7 +8,6 @@ import {
     AlertDialogHeader,
     AlertDialogTrigger,
 } from '@/Components/ui/alert-dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
@@ -20,12 +19,12 @@ import AppLayout from '@/Layouts/AppLayout';
 import { flashMessage } from '@/lib/utils';
 import { Link, router } from '@inertiajs/react';
 import { AlertDialogCancel, AlertDialogTitle } from '@radix-ui/react-alert-dialog';
-import { IconArrowsDownUp, IconCategory, IconPencil, IconPlus, IconRefresh, IconTrash } from '@tabler/icons-react';
+import { IconArrowsDownUp, IconPencil, IconPlus, IconRefresh, IconTrash, IconVersions } from '@tabler/icons-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 export default function Index(props) {
-    const { data: categories, meta } = props.categories;
+    const { data: roles, meta } = props.roles;
     const [params, setParams] = useState(props.state);
 
     const onSortable = (field) => {
@@ -37,9 +36,9 @@ export default function Index(props) {
     };
 
     UseFilter({
-        route: route('admin.categories.index'),
+        route: route('admin.roles.index'),
         values: params,
-        only: ['categories'],
+        only: ['roles'],
     });
     return (
         <>
@@ -48,10 +47,10 @@ export default function Index(props) {
                     <HeaderTitle
                         title={props.page_setting.title}
                         subtitle={props.page_setting.subtitle}
-                        icon={IconCategory}
+                        icon={IconVersions}
                     />
                     <Button variant="blue" size="lg" asChild>
-                        <Link href={route('admin.categories.create')}>
+                        <Link href={route('admin.roles.create')}>
                             <IconPlus size="4" />
                             Tambah
                         </Link>
@@ -117,15 +116,14 @@ export default function Index(props) {
                                         <Button
                                             variant="ghost"
                                             className="inline-flex group"
-                                            onClick={() => onSortable('slug')}
+                                            onClick={() => onSortable('guard_name')}
                                         >
-                                            Slug
+                                            Guard
                                             <span className="flex-none ml-2 rounded text-muted-foreground">
                                                 <IconArrowsDownUp className="size-4 text-muted-foreground" />
                                             </span>
                                         </Button>
                                     </TableHead>
-                                    <TableHead>Cover</TableHead>
                                     <TableHead>
                                         <Button
                                             variant="ghost"
@@ -142,22 +140,16 @@ export default function Index(props) {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {categories.map((category, index) => (
+                                {roles.map((role, index) => (
                                     <TableRow key={index}>
                                         <TableCell>{index + 1 + (meta.current_page - 1) * meta.per_page}</TableCell>
-                                        <TableCell>{category.name}</TableCell>
-                                        <TableCell>{category.slug}</TableCell>
-                                        <TableCell>
-                                            <Avatar>
-                                                <AvatarImage src={category.cover} />
-                                                <AvatarFallback>{category.name.substring(0, 1)}</AvatarFallback>
-                                            </Avatar>
-                                        </TableCell>
-                                        <TableCell>{category.created_at}</TableCell>
+                                        <TableCell>{role.name}</TableCell>
+                                        <TableCell>{role.guard_name}</TableCell>
+                                        <TableCell>{role.created_at}</TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-x-1">
                                                 <Button variant="slate" size="sm" asChild>
-                                                    <Link href={route('admin.categories.edit', [category])}>
+                                                    <Link href={route('admin.roles.edit', [role])}>
                                                         <IconPencil size="4" />
                                                     </Link>
                                                 </Button>
@@ -174,8 +166,8 @@ export default function Index(props) {
                                                             </AlertDialogTitle>
                                                             <AlertDescription>
                                                                 Tindakan ini tidak dapat dibatalkan. Tindakan ini akan
-                                                                menghapus kategori ini dan semua data yang memiliki
-                                                                kategori ini secara permanen!
+                                                                menghapus Peran ini dan semua data yang memiliki Peran
+                                                                ini secara permanen!
                                                             </AlertDescription>
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
@@ -183,7 +175,7 @@ export default function Index(props) {
                                                             <AlertDialogAction
                                                                 onClick={() =>
                                                                     router.delete(
-                                                                        route('admin.categories.destroy', [category]),
+                                                                        route('admin.roles.destroy', [role]),
                                                                         {
                                                                             preserveScroll: true,
                                                                             preserveState: true,
@@ -212,7 +204,7 @@ export default function Index(props) {
                         <p className="mb-2 text-sm text-muted-foreground">
                             Menampilkan{' '}
                             <span className="text-blue-500 font-meidum">
-                                {meta.to ?? 0} dari {meta.total} kategori
+                                {meta.to ?? 0} dari {meta.total} Peran
                             </span>
                         </p>
                         <div className="overflow-x-auto">
