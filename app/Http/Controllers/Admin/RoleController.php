@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\MessageType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RoleRequest;
 use App\Http\Resources\Admin\RoleResource;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Throwable;
 
 class RoleController extends Controller
 {
@@ -39,5 +42,34 @@ class RoleController extends Controller
                 'load' => 10,
             ]
         ]);
+    }
+
+    public function create()
+    {
+        return inertia('Admin/Roles/Create', [
+            'page_setting' => [
+                'title' => 'Tambah Role',
+                'subtitle' => 'Buat peran baru disini. Klik simpan setelah selesai',
+                'method' => 'POST',
+                'action' => route('admin.roles.store'),
+            ]
+        ]);
+    }
+
+    public function store(RoleRequest $request)
+    {
+        try {
+            Role::create([
+                'name' => $request->name,
+                'guard_name' => $request->guard_name,
+            ]);
+
+            flashMessage(MessageType::CREATED->message('Peran'));
+            return to_route('admin.roles.index');
+        } catch (Throwable $e) {
+            flashMessage(MessageType::ERROR->message(error: $e->getMessage()), 'error');
+            return back();
+            // return to_route('admin.roles.index');
+        }
     }
 }
