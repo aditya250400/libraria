@@ -121,7 +121,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Assign Users
     Route::controller(AssignUserController::class)->group(function () {
         Route::get('assign-users', 'index')->name('admin.assign-users.index');
-        Route::get('assign-users/edit/{users}', 'edit')->name('admin.assign-users.edit');
-        Route::put('assign-users/edit/{users}', 'update')->name('admin.assign-users.update');
+        Route::get('assign-users/edit/{user}', 'edit')->name('admin.assign-users.edit');
+        Route::put('assign-users/edit/{user}', 'update')->name('admin.assign-users.update');
     });
 });

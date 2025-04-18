@@ -16,9 +16,10 @@ class AssignUserResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'email' => $this->email,
             'username' => $this->username,
-            'roles' => $this->getRolesNames(),
+            'roles' => $this->getRoleNames(),
         ];
     }
 }
