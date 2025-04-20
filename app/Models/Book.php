@@ -81,6 +81,18 @@ class Book extends Model
         return false;
     }
 
+    public static function leastLoanBook($limit = 5)
+    {
+        return self::query()->select(['id', 'title', 'author'])->withCount('loans')->orderBy('loans_count')->limit($limit)->get();
+    }
+
+    public static function mostLoanBook($limit = 5)
+    {
+        return self::query()->select(['id', 'title', 'author'])->withCount('loans')->orderBy('loans_count', 'desc')->limit($limit)->get();
+    }
+
+
+
     public function stock_loan()
     {
         return $this->updateStock('available', 'loan');

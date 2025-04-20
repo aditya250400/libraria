@@ -1,7 +1,7 @@
 import CardStat from '@/Components/CardStat';
 import HeaderTitle from '@/Components/HeaderTitle';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
 import AppLayout from '@/Layouts/AppLayout';
 import {
     IconCalendar,
@@ -34,7 +34,7 @@ export default function Index(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_loans.days}</div>
                     </CardStat>
                     <CardStat
                         data={{
@@ -44,7 +44,7 @@ export default function Index(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_loans.weeks}</div>
                     </CardStat>
                     <CardStat
                         data={{
@@ -54,7 +54,7 @@ export default function Index(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_loans.months}</div>
                     </CardStat>
                     <CardStat
                         data={{
@@ -64,7 +64,7 @@ export default function Index(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_loans.years}</div>
                     </CardStat>
                 </div>
 
@@ -84,7 +84,16 @@ export default function Index(props) {
                                         <TableHead>Jumlah</TableHead>
                                     </TableRow>
                                 </TableHeader>
-                                <TableBody></TableBody>
+                                <TableBody>
+                                    {props.page_data.most_loan_books.map((book, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>{index + 1}</TableCell>
+                                            <TableCell>{book.title}</TableCell>
+                                            <TableCell>{book.author}</TableCell>
+                                            <TableCell>{book.loans_count}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
                             </Table>
                         </CardContent>
                     </Card>
@@ -102,7 +111,16 @@ export default function Index(props) {
                                         <TableHead>Jumlah</TableHead>
                                     </TableRow>
                                 </TableHeader>
-                                <TableBody></TableBody>
+                                <TableBody>
+                                    {props.page_data.least_loan_books.map((book, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>{index + 1}</TableCell>
+                                            <TableCell>{book.title}</TableCell>
+                                            <TableCell>{book.author}</TableCell>
+                                            <TableCell>{book.loans_count}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
                             </Table>
                         </CardContent>
                     </Card>
