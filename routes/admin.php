@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AssignPermissionController;
 use App\Http\Controllers\Admin\AssignUserController;
+use App\Http\Controllers\Admin\FineReportController;
 use App\Http\Controllers\Admin\LoanStatisticController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
@@ -22,6 +23,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // loan statistic
     Route::controller(LoanStatisticController::class)->group(function () {
         Route::get('loan-statistics', 'index')->name('admin.loan-statistics.index');
+    });
+
+    // fine report
+    Route::controller(FineReportController::class)->group(function () {
+        Route::get('fine-reports', 'index')->name('admin.fine-reports.index');
     });
 
     // category
