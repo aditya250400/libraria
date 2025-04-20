@@ -16,14 +16,14 @@ class Stock extends Model
 
     public function scopeFilter(Builder $query, array $filters)
     {
-        $query->when($filers['search'] ?? null, function ($query, $search) {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->whereHas('book', fn($query) => $query->where('title', 'REGEXP', $search));
             });
         });
     }
 
-    public function scopeSortng(Builder $query, array $sorts)
+    public function scopeSorting(Builder $query, array $sorts)
     {
         $query->when($sorts['field'] ?? null && $sorts['direction'] ?? null, function ($query) use ($sorts) {
             match ($sorts['field']) {
