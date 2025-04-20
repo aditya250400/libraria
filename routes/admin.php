@@ -21,7 +21,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // loan statistic
     Route::controller(LoanStatisticController::class)->group(function () {
-        Route::get('loan-statistic', 'index')->name('admin.loan-statistic.index');
+        Route::get('loan-statistics', 'index')->name('admin.loan-statistics.index');
     });
 
     // category

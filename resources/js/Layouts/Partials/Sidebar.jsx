@@ -35,7 +35,12 @@ export default function Sidebar({ url, user }) {
                 />
                 {/* statistik */}
                 <div className="px-3 py-2 text-sm font-semibold text-foreground">Statistik</div>
-                <NavLink url="#" title="Statistik Peminjaman" icon={IconChartDots2} />
+                <NavLink
+                    active={url.startsWith('/admin/loan-statistics')}
+                    url={route('admin.loan-statistics.index')}
+                    title="Statistik Peminjaman"
+                    icon={IconChartDots2}
+                />
                 <NavLink url="#" title="Laporan Denda" icon={IconMoneybag} />
                 <NavLink url="#" title="Laporan Stok Buku" icon={IconStack} />
                 {/* Master */}
