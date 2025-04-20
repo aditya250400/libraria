@@ -11,12 +11,19 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AssignPermissionController;
 use App\Http\Controllers\Admin\AssignUserController;
+use App\Http\Controllers\Admin\LoanStatisticController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\RouteAccessController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
+
+    // loan statistic
+    Route::controller(LoanStatisticController::class)->group(function () {
+        Route::get('loan-statistic', 'index')->name('admin.loan-statistic.index');
+    });
+
     // category
     Route::controller(CategoryController::class)->group(function () {
         Route::get('categories', 'index')->name('admin.categories.index');
