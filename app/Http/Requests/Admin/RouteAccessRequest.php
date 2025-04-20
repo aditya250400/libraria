@@ -23,8 +23,8 @@ class RouteAccessRequest extends FormRequest
     {
         return [
             'route_name' => 'required',
-            'role' => 'nullable|exists:roles,id',
-            'role' => 'nullable|exists:permssions,id',
+            'role' => 'nullable|exists:roles,name',
+            'permission' => 'nullable|exists:permissions,name',
         ];
     }
 
