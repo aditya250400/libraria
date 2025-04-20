@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\AssignPermissionController;
 use App\Http\Controllers\Admin\AssignUserController;
+use App\Http\Controllers\Admin\BookStockReportController;
 use App\Http\Controllers\Admin\FineReportController;
 use App\Http\Controllers\Admin\LoanStatisticController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -29,6 +30,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::controller(FineReportController::class)->group(function () {
         Route::get('fine-reports', 'index')->name('admin.fine-reports.index');
     });
+
+    // Book Stock Report
+    Route::controller(BookStockReportController::class)->group(function () {
+        Route::get('book-stock-report', 'index')->name('admin.book-stock-report.index');
+        Route::get('book-stock-report/edit/{stock}', 'edit')->name('admin.book-stock-report.edit');
+        Route::put('book-stock-report/edit/{stock}', 'update')->name('admin.book-stock-report.update');
+    });
+
 
     // category
     Route::controller(CategoryController::class)->group(function () {
