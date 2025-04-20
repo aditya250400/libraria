@@ -37,7 +37,7 @@ export default function SidebarResponsive({ url, user }) {
                             <IconLayoutSidebar className="size-5" />
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="left" className="flex flex-col max-h-screen overflow-y-auto">
+                    <SheetContent side="left" className="flex max-h-screen flex-col overflow-y-auto">
                         <SheetHeader>
                             <SheetTitle>
                                 <VisuallyHidden.Root>Sidebar Responsive</VisuallyHidden.Root>
@@ -123,7 +123,12 @@ export default function SidebarResponsive({ url, user }) {
                                     title="Tetapkan Peran"
                                     icon={IconLayoutKanban}
                                 />
-                                <NavLinkResponsive url="#" title="Akses Rute" icon={IconRoute} />
+                                <NavLinkResponsive
+                                    url={route('admin.route-accesses.index')}
+                                    active={url.startsWith('/admin/route-accesses')}
+                                    title="Akses Rute"
+                                    icon={IconRoute}
+                                />
                                 {/* Transaksi */}
                                 <div className="px-3 py-2 text-sm font-semibold text-foreground">Transaksi</div>
                                 <NavLinkResponsive
