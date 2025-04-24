@@ -43,8 +43,8 @@ export default function Index(props) {
     });
     return (
         <>
-            <div className="flex flex-col w-full pb-32">
-                <div className="flex flex-col justify-between mb-8 item-start gap-y-4 lg:flex-row lg:items-center">
+            <div className="flex w-full flex-col pb-32">
+                <div className="item-start mb-8 flex flex-col justify-between gap-y-4 lg:flex-row lg:items-center">
                     <HeaderTitle
                         title={props.page_setting.title}
                         subtitle={props.page_setting.subtitle}
@@ -60,7 +60,7 @@ export default function Index(props) {
 
                 <Card>
                     <CardHeader>
-                        <div className="flex flex-col w-full gap-4 lg:flex-row lg:items-center">
+                        <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-center">
                             <Input
                                 className="w-full sm:w-1/4"
                                 placeholder="Search..."
@@ -92,11 +92,11 @@ export default function Index(props) {
                                     <TableHead>
                                         <Button
                                             variant="ghost"
-                                            className="inline-flex group"
+                                            className="group inline-flex"
                                             onClick={() => onSortable('id')}
                                         >
                                             #
-                                            <span className="flex-none ml-2 rounded text-muted-foreground">
+                                            <span className="ml-2 flex-none rounded text-muted-foreground">
                                                 <IconArrowsDownUp className="size-4 text-muted-foreground" />
                                             </span>
                                         </Button>
@@ -104,11 +104,11 @@ export default function Index(props) {
                                     <TableHead>
                                         <Button
                                             variant="ghost"
-                                            className="inline-flex group"
+                                            className="group inline-flex"
                                             onClick={() => onSortable('name')}
                                         >
                                             Name
-                                            <span className="flex-none ml-2 rounded text-muted-foreground">
+                                            <span className="ml-2 flex-none rounded text-muted-foreground">
                                                 <IconArrowsDownUp className="size-4 text-muted-foreground" />
                                             </span>
                                         </Button>
@@ -116,11 +116,11 @@ export default function Index(props) {
                                     <TableHead>
                                         <Button
                                             variant="ghost"
-                                            className="inline-flex group"
+                                            className="group inline-flex"
                                             onClick={() => onSortable('slug')}
                                         >
                                             Slug
-                                            <span className="flex-none ml-2 rounded text-muted-foreground">
+                                            <span className="ml-2 flex-none rounded text-muted-foreground">
                                                 <IconArrowsDownUp className="size-4 text-muted-foreground" />
                                             </span>
                                         </Button>
@@ -129,11 +129,11 @@ export default function Index(props) {
                                     <TableHead>
                                         <Button
                                             variant="ghost"
-                                            className="inline-flex group"
+                                            className="group inline-flex"
                                             onClick={() => onSortable('created_at')}
                                         >
                                             Dibuat Pada
-                                            <span className="flex-none ml-2 rounded text-muted-foreground">
+                                            <span className="ml-2 flex-none rounded text-muted-foreground">
                                                 <IconArrowsDownUp className="size-4 text-muted-foreground" />
                                             </span>
                                         </Button>
@@ -208,10 +208,10 @@ export default function Index(props) {
                             </TableBody>
                         </Table>
                     </CardContent>
-                    <CardFooter className="flex flex-col items-center justify-between w-full py-2 border-t lg:flex-row">
+                    <CardFooter className="flex w-full flex-col items-center justify-between border-t py-2 lg:flex-row">
                         <p className="mb-2 text-sm text-muted-foreground">
                             Menampilkan{' '}
-                            <span className="text-blue-500 font-meidum">
+                            <span className="font-meidum text-blue-500">
                                 {meta.to ?? 0} dari {meta.total} kategori
                             </span>
                         </p>

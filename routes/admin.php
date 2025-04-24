@@ -33,9 +33,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Book Stock Report
     Route::controller(BookStockReportController::class)->group(function () {
-        Route::get('book-stock-report', 'index')->name('admin.book-stock-reports.index');
-        Route::get('book-stock-report/edit/{stock}', 'edit')->name('admin.book-stock-reports.edit');
-        Route::put('book-stock-report/edit/{stock}', 'update')->name('admin.book-stock-reports.update');
+        Route::get('book-stock-reports', 'index')->name('admin.book-stock-reports.index');
+        Route::get('book-stock-reports/edit/{stock}', 'edit')->name('admin.book-stock-reports.edit');
+        Route::put('book-stock-reports/edit/{stock}', 'update')->name('admin.book-stock-reports.update');
     });
 
 
