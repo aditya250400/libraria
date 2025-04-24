@@ -2,8 +2,9 @@ import CardStat from '@/Components/CardStat';
 import HeaderTitle from '@/Components/HeaderTitle';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
-import { Table, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
 import AppLayout from '@/Layouts/AppLayout';
+import { formatToRupiah } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
 import {
     IconArrowUpRight,
@@ -37,7 +38,7 @@ export default function Dashboard(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_books}</div>
                     </CardStat>
                     <CardStat
                         data={{
@@ -47,7 +48,7 @@ export default function Dashboard(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_users}</div>
                     </CardStat>
                     <CardStat
                         data={{
@@ -57,7 +58,7 @@ export default function Dashboard(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_loans}</div>
                     </CardStat>
                     <CardStat
                         data={{
@@ -67,7 +68,7 @@ export default function Dashboard(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_returns}</div>
                     </CardStat>
                 </div>
             )}
@@ -81,7 +82,7 @@ export default function Dashboard(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_loans}</div>
                     </CardStat>
                     <CardStat
                         data={{
@@ -91,7 +92,7 @@ export default function Dashboard(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{props.page_data.total_returns}</div>
                     </CardStat>
                     <CardStat
                         data={{
@@ -101,7 +102,7 @@ export default function Dashboard(props) {
                             iconClassName: 'text-white',
                         }}
                     >
-                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-2xl font-bold">{formatToRupiah(props.page_data.total_fines)}</div>
                     </CardStat>
                 </div>
             )}
@@ -111,7 +112,12 @@ export default function Dashboard(props) {
                     <CardHeader>
                         <div className="flex flex-col justify-between gap-y-4 lg:flex-row lg:items-center">
                             <div className="flex flex-col gap-y-2">
-                                <CardTitle>Transaksi Peminjaman</CardTitle>
+                                <CardTitle>
+                                    {' '}
+                                    {auth.role.some((role) => ['member'].includes(role))
+                                        ? ' Transaksi Peminjaman Saya'
+                                        : 'Transaksi Peminjaman'}
+                                </CardTitle>
                                 <CardDescription>Anda dapat melihat 5 transaksi terakhir peminjaman</CardDescription>
                             </div>
                             <Button variant="blue" asChild>
@@ -136,9 +142,27 @@ export default function Dashboard(props) {
                                     <TableHead>#</TableHead>
                                     <TableHead>Kode Peminjaman</TableHead>
                                     <TableHead>Buku</TableHead>
-                                    <TableHead>Member</TableHead>
+                                    {auth.role.some((role) => ['member'].includes(role)) ? (
+                                        ''
+                                    ) : (
+                                        <TableHead>Member</TableHead>
+                                    )}
                                 </TableRow>
                             </TableHeader>
+                            <TableBody>
+                                {props.page_data.loans.map((loan, index) => (
+                                    <TableRow>
+                                        <TableCell>{index + 1}</TableCell>
+                                        <TableCell>{loan.loan_code}</TableCell>
+                                        <TableCell>{loan.book.title}</TableCell>
+                                        {auth.role.some((role) => ['member'].includes(role)) ? (
+                                            ''
+                                        ) : (
+                                            <TableCell>{loan.user.name}</TableCell>
+                                        )}
+                                    </TableRow>
+                                ))}
+                            </TableBody>
                         </Table>
                     </CardContent>
                 </Card>
@@ -146,7 +170,11 @@ export default function Dashboard(props) {
                     <CardHeader>
                         <div className="flex flex-col justify-between gap-y-4 lg:flex-row lg:items-center">
                             <div className="flex flex-col gap-y-2">
-                                <CardTitle>Transaksi Pengembalian</CardTitle>
+                                <CardTitle>
+                                    {auth.role.some((role) => ['member'].includes(role))
+                                        ? ' Transaksi Pengembalian Saya'
+                                        : 'Transaksi Pengembalian'}
+                                </CardTitle>
                                 <CardDescription>Anda dapat melihat 5 transaksi terakhir pengembalian</CardDescription>
                             </div>
                             <Button variant="blue" asChild>
@@ -171,9 +199,27 @@ export default function Dashboard(props) {
                                     <TableHead>#</TableHead>
                                     <TableHead>Kode Pengembalian</TableHead>
                                     <TableHead>Buku</TableHead>
-                                    <TableHead>Member</TableHead>
+                                    {auth.role.some((role) => ['member'].includes(role)) ? (
+                                        ''
+                                    ) : (
+                                        <TableHead>Member</TableHead>
+                                    )}
                                 </TableRow>
                             </TableHeader>
+                            <TableBody>
+                                {props.page_data.return_books.map((return_book, index) => (
+                                    <TableRow>
+                                        <TableCell>{index + 1}</TableCell>
+                                        <TableCell>{return_book.return_book_code}</TableCell>
+                                        <TableCell>{return_book.book.title}</TableCell>
+                                        {auth.role.some((role) => ['member'].includes(role)) ? (
+                                            ''
+                                        ) : (
+                                            <TableCell>{return_book.user.name}</TableCell>
+                                        )}
+                                    </TableRow>
+                                ))}
+                            </TableBody>
                         </Table>
                     </CardContent>
                 </Card>
