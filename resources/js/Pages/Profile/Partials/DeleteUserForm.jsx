@@ -38,7 +38,8 @@ export default function DeleteUserForm({ className = '' }) {
         });
     };
 
-    const closeModal = () => {
+    const closeModal = (e) => {
+        e.preventDefault();
         setConfirmingUserDeletion(false);
 
         clearErrors();
@@ -84,13 +85,13 @@ export default function DeleteUserForm({ className = '' }) {
                                 ref={passwordInput}
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
-                                className="block w-3/4 mt-1"
+                                className="mt-1 block w-3/4"
                                 placeholder="Password"
                             />
                             {errors.password && <InputError message={errors.password} className="mt-2" />}{' '}
                         </div>
 
-                        <div className="flex justify-end mt-6">
+                        <div className="mt-6 flex justify-end">
                             <Button variant="ghost" size="lg" onClick={closeModal}>
                                 Batal
                             </Button>
