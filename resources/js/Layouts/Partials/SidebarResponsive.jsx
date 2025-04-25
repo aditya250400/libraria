@@ -184,7 +184,7 @@ export default function SidebarResponsive({ url, user }) {
                                 {user.role.some((role) => ['member'].includes(role)) && (
                                     <>
                                         <NavLinkResponsive
-                                            url="#"
+                                            url={route('front.books.index')}
                                             active={url.startsWith('/books')}
                                             title="Buku"
                                             icon={IconBook}

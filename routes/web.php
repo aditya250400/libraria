@@ -18,7 +18,7 @@ Route::controller(DashboardController::class)->middleware(['auth'])->group(funct
 // books member
 Route::controller(BookFrontController::class)->middleware(['auth', 'role:member'])->group(function () {
     Route::get('books',  'index')->name('front.books.index');
-    Route::get('books/{book:slug}',  'show')->name('front.books.index');
+    Route::get('books/{book:slug}',  'show')->name('front.books.show');
 });
 
 

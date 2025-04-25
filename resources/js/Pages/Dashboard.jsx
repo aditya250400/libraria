@@ -151,7 +151,7 @@ export default function Dashboard(props) {
                             </TableHeader>
                             <TableBody>
                                 {props.page_data.loans.map((loan, index) => (
-                                    <TableRow>
+                                    <TableRow key={index}>
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{loan.loan_code}</TableCell>
                                         <TableCell>{loan.book.title}</TableCell>
@@ -208,7 +208,7 @@ export default function Dashboard(props) {
                             </TableHeader>
                             <TableBody>
                                 {props.page_data.return_books.map((return_book, index) => (
-                                    <TableRow>
+                                    <TableRow key={index}>
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{return_book.return_book_code}</TableCell>
                                         <TableCell>{return_book.book.title}</TableCell>

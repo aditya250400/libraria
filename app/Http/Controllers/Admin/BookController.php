@@ -21,7 +21,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::query()
-            ->select(['id', 'book_code', 'title', 'slug', 'author', 'publication_year', 'isbn', 'language', 'number_of_pages', 'status', 'price', 'category_id', 'publisher_id', 'created_at'])
+            ->select(['id', 'book_code', 'cover', 'title', 'slug', 'author', 'publication_year', 'isbn', 'language', 'number_of_pages', 'status', 'price', 'category_id', 'publisher_id', 'created_at'])
             ->filter(request()->only(['search']))
             ->sorting(request()->only(['field', 'direction']))
             ->with(['category', 'stock', 'publisher'])
