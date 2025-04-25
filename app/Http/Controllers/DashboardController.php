@@ -16,7 +16,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $authUser = Auth::user();
 
         $loans = Loan::query()
             ->select(['id', 'loan_code', 'book_id', 'user_id', 'created_at'])

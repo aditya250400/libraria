@@ -17,7 +17,7 @@ import {
 } from '@tabler/icons-react';
 
 export default function Dashboard(props) {
-    const auth = props.auth.user;
+    const { user } = props.auth;
 
     return (
         <div className="flex w-full flex-col space-y-4 pb-32">
@@ -28,7 +28,7 @@ export default function Dashboard(props) {
                     icon={IconDashboard}
                 />
             </div>
-            {auth.role.some((role) => ['admin', 'operator'].includes(role)) && (
+            {user.role.some((role) => ['admin', 'operator'].includes(role)) && (
                 <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
                     <CardStat
                         data={{
@@ -72,7 +72,7 @@ export default function Dashboard(props) {
                     </CardStat>
                 </div>
             )}
-            {auth.role.some((role) => ['member'].includes(role)) && (
+            {user.role.some((role) => ['member'].includes(role)) && (
                 <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
                     <CardStat
                         data={{
@@ -114,14 +114,14 @@ export default function Dashboard(props) {
                             <div className="flex flex-col gap-y-2">
                                 <CardTitle>
                                     {' '}
-                                    {auth.role.some((role) => ['member'].includes(role))
+                                    {user.role.some((role) => ['member'].includes(role))
                                         ? ' Transaksi Peminjaman Saya'
                                         : 'Transaksi Peminjaman'}
                                 </CardTitle>
                                 <CardDescription>Anda dapat melihat 5 transaksi terakhir peminjaman</CardDescription>
                             </div>
                             <Button variant="blue" asChild>
-                                {auth.role.some((role) => ['admin', 'operator'].includes(role)) ? (
+                                {user.role.some((role) => ['admin', 'operator'].includes(role)) ? (
                                     <Link href={route('admin.loans.index')}>
                                         Lihat Semua
                                         <IconArrowUpRight className="size-4" />
@@ -142,7 +142,7 @@ export default function Dashboard(props) {
                                     <TableHead>#</TableHead>
                                     <TableHead>Kode Peminjaman</TableHead>
                                     <TableHead>Buku</TableHead>
-                                    {auth.role.some((role) => ['member'].includes(role)) ? (
+                                    {user.role.some((role) => ['member'].includes(role)) ? (
                                         ''
                                     ) : (
                                         <TableHead>Member</TableHead>
@@ -155,7 +155,7 @@ export default function Dashboard(props) {
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{loan.loan_code}</TableCell>
                                         <TableCell>{loan.book.title}</TableCell>
-                                        {auth.role.some((role) => ['member'].includes(role)) ? (
+                                        {user.role.some((role) => ['member'].includes(role)) ? (
                                             ''
                                         ) : (
                                             <TableCell>{loan.user.name}</TableCell>
@@ -171,14 +171,14 @@ export default function Dashboard(props) {
                         <div className="flex flex-col justify-between gap-y-4 lg:flex-row lg:items-center">
                             <div className="flex flex-col gap-y-2">
                                 <CardTitle>
-                                    {auth.role.some((role) => ['member'].includes(role))
+                                    {user.role.some((role) => ['member'].includes(role))
                                         ? ' Transaksi Pengembalian Saya'
                                         : 'Transaksi Pengembalian'}
                                 </CardTitle>
                                 <CardDescription>Anda dapat melihat 5 transaksi terakhir pengembalian</CardDescription>
                             </div>
                             <Button variant="blue" asChild>
-                                {auth.role.some((role) => ['admin', 'operator'].includes(role)) ? (
+                                {user.role.some((role) => ['admin', 'operator'].includes(role)) ? (
                                     <Link href={route('admin.return-books.index')}>
                                         Lihat Semua
                                         <IconArrowUpRight className="size-4" />
@@ -199,7 +199,7 @@ export default function Dashboard(props) {
                                     <TableHead>#</TableHead>
                                     <TableHead>Kode Pengembalian</TableHead>
                                     <TableHead>Buku</TableHead>
-                                    {auth.role.some((role) => ['member'].includes(role)) ? (
+                                    {user.role.some((role) => ['member'].includes(role)) ? (
                                         ''
                                     ) : (
                                         <TableHead>Member</TableHead>
@@ -212,7 +212,7 @@ export default function Dashboard(props) {
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{return_book.return_book_code}</TableCell>
                                         <TableCell>{return_book.book.title}</TableCell>
-                                        {auth.role.some((role) => ['member'].includes(role)) ? (
+                                        {user.role.some((role) => ['member'].includes(role)) ? (
                                             ''
                                         ) : (
                                             <TableCell>{return_book.user.name}</TableCell>
