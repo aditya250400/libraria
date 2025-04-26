@@ -190,7 +190,7 @@ export default function SidebarResponsive({ url, user }) {
                                             icon={IconBook}
                                         />
                                         <NavLinkResponsive
-                                            url="#"
+                                            url={route('front.categories.index')}
                                             active={url.startsWith('/categories')}
                                             title="Kategori"
                                             icon={IconCategory}

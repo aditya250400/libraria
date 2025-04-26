@@ -162,7 +162,12 @@ export default function Sidebar({ url, user }) {
                             title="Buku"
                             icon={IconBook}
                         />
-                        <NavLink url="#" active={url.startsWith('/categories')} title="Kategori" icon={IconCategory} />
+                        <NavLink
+                            url={route('front.categories.index')}
+                            active={url.startsWith('/categories')}
+                            title="Kategori"
+                            icon={IconCategory}
+                        />
 
                         {/* Transaksi member */}
                         <div className="px-3 py-2 text-sm font-semibold text-foreground">Transaksi</div>
