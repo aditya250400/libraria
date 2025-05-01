@@ -213,7 +213,7 @@ export default function SidebarResponsive({ url, user }) {
                                             icon={IconCreditCardRefund}
                                         />
                                         <NavLinkResponsive
-                                            url="#"
+                                            url={route('front.fines.indes')}
                                             active={url.startsWith('/fines')}
                                             title="Denda"
                                             icon={IconMoneybag}

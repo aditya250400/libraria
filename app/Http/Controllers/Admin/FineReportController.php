@@ -17,7 +17,7 @@ class FineReportController extends Controller
     public function index()
     {
         $fines = Fine::query()
-            ->select(['id', 'return_book_id', 'user_id', 'late_fee', 'other_fee', 'fine_date', 'payment_status', 'created_at'])
+            ->select(['id', 'return_book_id', 'user_id', 'late_fee', 'other_fee', 'fine_date', 'payment_status', 'created_at', 'total_fee'])
             ->with(['user', 'returnBook'])
             ->paginate(10)
             ->withQueryString();
