@@ -20,6 +20,7 @@ class FineFrontResource extends JsonResource
             'late_fee' => $this->late_fee,
             'other_fee' => $this->other_fee,
             'total_fee' => $this->total_fee,
+            'payment_status' => $this->payment_status,
             'loan' => $this->whenLoaded('returnBook', [
                 'id' => $this->returnBook?->loan?->id,
                 'loan_code' => $this->returnBook?->loan?->loan_code,

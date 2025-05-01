@@ -48,7 +48,7 @@ Route::controller(ReturnBookFrontController::class)->middleware(['auth', 'role:m
 });
 
 // fine member
-Route::get('fines', FineFrontController::class)->middleware(['auth', 'role:member'])->name('front.fines.member');
+Route::get('fines', FineFrontController::class)->middleware(['auth', 'role:member'])->name('front.fines.index');
 
 
 Route::middleware('auth')->group(function () {
