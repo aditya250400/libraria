@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ReturnBookFrontResource;
+use App\Http\Resources\ReturnBookFrontSingleResource;
 use App\Models\Book;
 use App\Models\Loan;
 use App\Models\ReturnBook;
@@ -62,7 +63,24 @@ class ReturnBookFrontController extends Controller
 
         flashMessage('Buku anda sedang dilakukan pengecekan oleh petugas kami');
 
-        // return to_route('front.return-books.show', [$return_book->return_book_code]);
-        return to_route('front.loans.show', [$loan->loan_code]);
+        return to_route('front.return-books.show', [$return_book->return_book_code]);
+        // return to_route('front.loans.show', [$loan->loan_code]);
+    }
+
+    public function show(ReturnBook $returnBook)
+    {
+        return inertia('Front/ReturnBooks/Show', [
+            'page_setting' => [
+                'title' => 'Detail Pengembalian Buku',
+                'subtitle' => 'Informasi detail buku yang anda kembalikan',
+            ],
+            'return_book' => new ReturnBookFrontSingleResource($returnBook->load(
+                'book',
+                'user',
+                'loan',
+                'fine',
+                'returnBookCheck'
+            )),
+        ]);
     }
 }

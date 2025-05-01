@@ -8,7 +8,7 @@ export default function GetFineStatusBadge({ status }) {
 
     switch (status) {
         case PENDING:
-            badge = 'text-white bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-500 border-yellow-500';
+            badge = 'text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-500 border-yellow-500';
             text = PENDING;
             break;
         case SUCCESS:
