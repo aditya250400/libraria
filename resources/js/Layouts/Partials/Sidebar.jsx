@@ -173,7 +173,7 @@ export default function Sidebar({ url, user }) {
                         <div className="px-3 py-2 text-sm font-semibold text-foreground">Transaksi</div>
 
                         <NavLink
-                            url="#"
+                            url={route('front.loans.index')}
                             active={url.startsWith('/loans')}
                             title="Peminjaman"
                             icon={IconCreditCardPay}
