@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookFrontController;
 use App\Http\Controllers\CategoryFrontController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoanFrontController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,14 @@ Route::controller(BookFrontController::class)->middleware(['auth', 'role:member'
 Route::controller(CategoryFrontController::class)->middleware(['auth', 'role:member'])->group(function () {
     Route::get('categories',  'index')->name('front.categories.index');
     Route::get('categories/{category:slug}',  'show')->name('front.categories.show');
+});
+
+
+// loan member
+Route::controller(LoanFrontController::class)->middleware(['auth', 'role:member'])->group(function () {
+    Route::get('loans',  'index')->name('front.loans.index');
+    Route::get('loans/{loan:loan_code}/detail',  'show')->name('front.loans.show');
+    Route::post('loans/{book:slug}/create', 'store')->name('front.loans.store');
 });
 
 
