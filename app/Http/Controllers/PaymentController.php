@@ -126,4 +126,9 @@ class PaymentController extends Controller
                 ], 400);
         }
     }
+
+    public function success()
+    {
+        return inertia('Payments/Success');
+    }
 }
