@@ -26,8 +26,8 @@ class PaymentController extends Controller
             ],
             'customer_details' => [
                 'first_name' => $request->first_name,
-                'last_name' => $request->first_name,
-                'email' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
             ]
         ];
 
