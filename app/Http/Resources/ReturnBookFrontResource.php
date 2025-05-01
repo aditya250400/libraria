@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ReturnBookFrontResource extends JsonResource
 {
@@ -17,7 +18,7 @@ class ReturnBookFrontResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'return_book_code' => $this->idreturn_book_code,
+            'return_book_code' => $this->return_book_code,
             'status' => $this->status,
             'return_date' => $this->return_date ? Carbon::parse($this->return_date)->format('d M Y') : null,
             'created_at' => $this->created_at->format('d M Y'),
@@ -25,12 +26,14 @@ class ReturnBookFrontResource extends JsonResource
                 'id' => $this->book?->id,
                 'title' => $this->book?->title,
                 'slug' => $this->book?->slug,
+                'cover' => $this->book?->cover ? Storage::url($this->book?->cover) : null,
+                'synopsis' => $this->book?->synopsis,
             ]),
             'loan' => $this->whenLoaded('loan', [
                 'id' => $this->loan?->id,
                 'loan_code' => $this->loan?->loan_code,
-                'loan_date' => Carbon::parse($this->loan?->loan_date),
-                'due_date' => Carbon::parse($this->loan?->due_date),
+                'loan_date' => Carbon::parse($this->loan?->loan_date)->format('d M Y'),
+                'due_date' => Carbon::parse($this->loan?->due_date)->format('d M Y'),
             ]),
             'user' => $this->whenLoaded('user', [
                 'id' => $this->user?->id,

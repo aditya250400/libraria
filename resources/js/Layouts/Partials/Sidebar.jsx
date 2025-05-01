@@ -180,7 +180,7 @@ export default function Sidebar({ url, user }) {
                         />
 
                         <NavLink
-                            url="#"
+                            url={route('front.return-books.index')}
                             active={url.startsWith('/return-books')}
                             title="Pengembalian"
                             icon={IconCreditCardRefund}
