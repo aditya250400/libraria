@@ -56,7 +56,7 @@ class PaymentController extends Controller
         }
 
         $return_book = ReturnBook::query()
-            ->where('return_book_code', $request->order->id)
+            ->where('return_book_code', $request->order_id)
             ->first();
 
 

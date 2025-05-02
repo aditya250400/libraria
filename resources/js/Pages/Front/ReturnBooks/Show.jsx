@@ -29,7 +29,7 @@ export default function Show(props) {
             window.snap.pay(snapToken, {
                 onSuccess: (result) => {
                     toast['success']('Pembayaran Success');
-                    router.get(route('payment.success'));
+                    router.get(route('payments.success'));
                 },
                 onPending: (result) => toast['warning']('Pembayaran Pending'),
                 onError: (result) => toast['error']('Kesalahan Pembayaran'),
@@ -37,14 +37,13 @@ export default function Show(props) {
             });
         } catch (error) {
             toast['error'](`Kesalahan pembayaran ${error}`);
-            console.log(error);
         }
     };
 
     return (
         <>
-            <div className="flex w-full flex-col space-y-4 pb-32">
-                <div className="item-start flex flex-col justify-between gap-y-4 lg:flex-row lg:items-center">
+            <div className="flex flex-col w-full pb-32 space-y-4">
+                <div className="flex flex-col justify-between item-start gap-y-4 lg:flex-row lg:items-center">
                     <HeaderTitle
                         title={props.page_setting.title}
                         subtitle={props.page_setting.subtitle}
@@ -53,7 +52,7 @@ export default function Show(props) {
                 </div>
 
                 <Card>
-                    <CardHeader className="flex flex-col gap-6 border-b border-muted text-sm lg:flex-row lg:items-center lg:justify-between lg:px-6">
+                    <CardHeader className="flex flex-col gap-6 text-sm border-b border-muted lg:flex-row lg:items-center lg:justify-between lg:px-6">
                         <div>
                             <dt className="font-medium text-foreground">Kode Peminjaman</dt>
                             <dd className="mt-1 text-muted-foreground">{props.return_book.loan.loan_code}</dd>
@@ -75,16 +74,16 @@ export default function Show(props) {
                             <dd className="mt-1 text-muted-foreground">{props.return_book.status}</dd>
                         </div>
                     </CardHeader>
-                    <CardContent className="divide-y divide-gray-200 py-6">
+                    <CardContent className="py-6 divide-y divide-gray-200">
                         <div className="flex flex-wrap justify-center lg:flex-nowrap lg:items-start">
-                            <div className="overfow-hidden h-40 w-40 flex-shrink-0 rounded-lg bg-gray-200">
+                            <div className="flex-shrink-0 w-40 h-40 bg-gray-200 rounded-lg overfow-hidden">
                                 <img
                                     src={props.return_book.book.cover}
                                     alt={props.return_book.book.title}
-                                    className="h-full w-full object-cover object-center"
+                                    className="object-cover object-center w-full h-full"
                                 />
                             </div>
-                            <div className="ml-6 flex-1 text-sm">
+                            <div className="flex-1 ml-6 text-sm">
                                 <h5 className="text-lg font-bold leading-relaxed">{props.return_book.book.title}</h5>
                                 <p className="hidden whitespace-pre-wrap text-muted-foreground lg:mt-2 lg:block">
                                     {props.return_book.book.synopsis}
@@ -94,7 +93,7 @@ export default function Show(props) {
                     </CardContent>
                     <CardFooter className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                         <div className="flex items-center">
-                            <IconCircleCheck className="size-5 text-green-500" />
+                            <IconCircleCheck className="text-green-500 size-5" />
                             <p className="ml-2 text-sm font-medium text-muted-foreground">
                                 Dikembalikan pada tanggal{' '}
                                 <time className="font-extrabold" dateTime={props.return_book.return_date}>
@@ -103,7 +102,7 @@ export default function Show(props) {
                             </p>
                         </div>
                         <div className="flex pt-6 text-sm font-medium lg:items-center lg:border-none lg:pt-0">
-                            <div className="flex flex-1 justify-center">
+                            <div className="flex justify-center flex-1">
                                 <Button variant="link">
                                     <Link href={route('front.books.show', [props.return_book.book.slug])}>
                                         Lihat Buku
@@ -129,10 +128,10 @@ export default function Show(props) {
 
                 {props.return_book.fine && (
                     <Card>
-                        <CardContent className="space-y-20 p-6">
+                        <CardContent className="p-6 space-y-20">
                             <div>
-                                <div className="rounded-lg px-4 py-6">
-                                    <dl className="flex flex-col gap-x-12 gap-y-4 text-sm leading-relaxed text-foreground lg:flex-row">
+                                <div className="px-4 py-6 rounded-lg">
+                                    <dl className="flex flex-col text-sm leading-relaxed gap-x-12 gap-y-4 text-foreground lg:flex-row">
                                         <div className="flex flex-col">
                                             <dt className="font-semibold">Kode Peminjaman</dt>
                                             <dd>{props.return_book.loan.loan_code}</dd>
@@ -157,7 +156,7 @@ export default function Show(props) {
                                         </div>
                                     </dl>
                                 </div>
-                                <Table className="mt-6 w-full">
+                                <Table className="w-full mt-6">
                                     <TableHeader>
                                         <TableRow>
                                             <TableHead>Pengguna</TableHead>
