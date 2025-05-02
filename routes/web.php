@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryFrontController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FineFrontController;
 use App\Http\Controllers\LoanFrontController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReturnBookFrontController;
 use Illuminate\Foundation\Application;
@@ -49,6 +50,13 @@ Route::controller(ReturnBookFrontController::class)->middleware(['auth', 'role:m
 
 // fine member
 Route::get('fines', FineFrontController::class)->middleware(['auth', 'role:member'])->name('front.fines.index');
+
+// payment
+Route::controller(PaymentController::class)->group(function () {
+    Route::post('payments', 'create')->name('payments.create');
+    Route::post('payments/callback', 'callback')->name('payments.callback');
+    Route::get('payments/success', 'success')->name('payments.success');
+});
 
 
 Route::middleware('auth')->group(function () {
