@@ -26,7 +26,7 @@ export const formatToRupiah = (amount) => {
     return formatter.format(amount);
 };
 
-export const message = {
+export const messages = {
     503: {
         title: 'Service Unavailable',
         description: 'Sorry, we are doing some maintenance. Please check back soon',
