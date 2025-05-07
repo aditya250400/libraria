@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\RouteAccess;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;

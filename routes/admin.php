@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\RouteAccessController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'role:admin|operator'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'dynamic.role_permission'])->prefix('admin')->group(function () {
 
     // loan statistic
     Route::controller(LoanStatisticController::class)->group(function () {
